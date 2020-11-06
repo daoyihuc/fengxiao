@@ -1,0 +1,1 @@
+<view class="content"><image src="{{poster}}" mode show-menu-by-longpress="{{true}}"></image></view>

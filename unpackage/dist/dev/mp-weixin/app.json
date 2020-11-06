@@ -1,0 +1,76 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/store/store",
+    "pages/promotion/promotion",
+    "pages/our/our",
+    "pages/index/Recurrence/Recurrence",
+    "pages/index/obtain/obtain",
+    "pages/index/Withdrawal/Withdrawal",
+    "pages/index/store_info/store_info",
+    "pages/store/Store_entry/Store_entry",
+    "pages/store/Store_info/Store_info",
+    "pages/store/store_share/store_share",
+    "pages/store/all_store/all_store",
+    "pages/store/activity/activity",
+    "pages/store/County_agent/County_agent",
+    "pages/store/profit/profit",
+    "pages/promotion/Integral_center/Integral_center",
+    "pages/promotion/Promotion_rules/Promotion_rules",
+    "pages/promotion/record/record",
+    "pages/promotion/Poster/Poster",
+    "pages/our/My_code/My_code",
+    "pages/our/My_store/My_store",
+    "pages/our/store_center/store_center",
+    "pages/our/about/about",
+    "pages/our/opinion/opinion",
+    "pages/our/our_info/our_info",
+    "pages/our/search/search",
+    "pages/our/Business_data/Business_data",
+    "pages/our/order_details/order_details",
+    "pages/our/search_info/search_info",
+    "pages/our/poster/poster",
+    "pages/our/logn/logn"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "selectedColor": "#FE5A41",
+    "color": "#666666",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/static/img/store/index.png",
+        "selectedIconPath": "/static/img/index/kabao.png",
+        "text": "卡包"
+      },
+      {
+        "pagePath": "pages/store/store",
+        "iconPath": "/static/img/index/dianpu.png",
+        "selectedIconPath": "/static/img/store/store.png",
+        "text": "门店"
+      },
+      {
+        "pagePath": "pages/promotion/promotion",
+        "iconPath": "/static/img/index/tuiguang.png",
+        "selectedIconPath": "/static/img/promotion/tuiguang3.png",
+        "text": "推广中心"
+      },
+      {
+        "pagePath": "pages/our/our",
+        "iconPath": "/static/img/index/wode.png",
+        "selectedIconPath": "/static/img/our/wode.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap63.json"
+}

@@ -1,0 +1,9 @@
+<view class="content"><view class="top_img"><image src="../../../static/img/store/left.png" mode data-event-opts="{{[['tap',[['black',['$event']]]]]}}" bindtap="__e"></image><text>推广活动</text></view><view class="card_top"><view class="row"></view><text>活动简介</text></view><view class="info">门店简介门店简介门店简介门店简介门店简介门店简介门店
+		简介门店简介门店简介门店简介门店简介门店简介门店简介
+		门店简介门店简介门店简介门店简介门店简介门店简介门店
+		简介门店简介门店简介门店简介门店简介门店简介门店简介
+		门店简介门店简介门店简介门店
+		简介门店简介门店简介门店简介门店简介门店简介门店简介
+		门店简介门店简介门店简介门店简介门店简介门店简介门店
+		简介门店简介门店简介门店简介门店简介门店简介门店简介
+		门店简介门店简介门店简介门店</view><block wx:if="{{isShow==true}}"><loading vue-id="646972e4-1" bind:__l="__l"></loading></block></view>

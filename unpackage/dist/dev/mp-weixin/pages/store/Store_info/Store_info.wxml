@@ -1,0 +1,9 @@
+<view class="content"><view class="top_img"><image src="../../../static/img/store/left.png" mode data-event-opts="{{[['tap',[['black',['$event']]]]]}}" bindtap="__e"></image><text>门店</text></view><view class="store"><view class="left"><view class="store_name">莫格(moge)万家丽长沙门店</view><view class="text_li">长沙市开福区万达国际总部C3栋1005</view><view class="text_li">联系电话：15857772121</view></view><view data-event-opts="{{[['tap',[['share',['$event']]]]]}}" class="right" bindtap="__e"><image src="../../../static/img/store/fenxiang.png" mode></image></view></view><view class="card_top"><view class="row"></view><text>门店介绍</text></view><view class="info">门店简介门店简介门店简介门店简介门店简介门店简介门店
+		简介门店简介门店简介门店简介门店简介门店简介门店简介
+		门店简介门店简介门店简介门店简介门店简介门店简介门店
+		简介门店简介门店简介门店简介门店简介门店简介门店简介
+		门店简介门店简介门店简介门店
+		简介门店简介门店简介门店简介门店简介门店简介门店简介
+		门店简介门店简介门店简介门店简介门店简介门店简介门店
+		简介门店简介门店简介门店简介门店简介门店简介门店简介
+		门店简介门店简介门店简介门店</view><block wx:if="{{isShow==true}}"><loading vue-id="233dc1a4-1" bind:__l="__l"></loading></block></view>

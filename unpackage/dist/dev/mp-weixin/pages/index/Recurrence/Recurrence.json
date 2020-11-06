@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "提现记录",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "lists": "/components/Lists/Lists",
+    "loading": "/components/public/loading"
+  }
+}
