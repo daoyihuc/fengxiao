@@ -1,8 +1,6 @@
 import loading from "../../components/public/loading.vue";
-/* 接口 */
-import {
-	getIndexData
-} from "../../api/Index/index.js"
+/* 接口名称 */
+import { getIndexData } from "../../api/Index/index.js"
  export default{
 	data() {
 		return {
