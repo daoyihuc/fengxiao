@@ -152,19 +152,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
     return {
-      search_text: '' //搜索的类容
+      search_text: '', //搜索的类容
+      search_list: [
+      {
+        image: '../../../static/img/index/erweima.png',
+        text: '14760716236' },
+
+      {
+        image: '../../../static/img/index/erweima.png',
+        text: '14589568521' },
+
+      {
+        image: '../../../static/img/index/erweima.png',
+        text: '15698563247' }],
+
+
+      color_list: [], //截取有颜色的数组
+      color_text: '', //有颜色的文字
+      no_color_text: '' //没有颜色的文字
     };
   },
+
   methods: {
     /* 跳转搜索页面 */
     tab_searchm: function tab_searchm() {
       uni.navigateTo({
         url: '../search_info/search_info?id=' + 1 });
 
+    },
+    /* 搜索的类容与下面的匹配 */
+    input_color: function input_color(e) {
+      var lenght = e.detail.value.length;
+      var arr = [];
+      for (var i in this.search_list) {
+        var json = {};
+        json.image = this.search_list[i].image;
+        json.color_text = this.search_list[i].text.slice(0, lenght);
+        json.no_color_text = this.search_list[i].text.slice(lenght, 12);
+        arr.push(json);
+      }
+      this.color_list = arr;
+      console.log(this.color_list);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

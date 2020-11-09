@@ -4,5 +4,7 @@
   "navigationBarBackgroundColor": "#FD7239",
   "navigationStyle": "custom",
   "navigationBarTextStyle": "white",
-  "usingComponents": {}
+  "usingComponents": {
+    "loading": "/components/public/loading"
+  }
 }

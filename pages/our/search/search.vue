@@ -3,17 +3,18 @@
 		<!-- 搜索条 -->
 		<view class="search" @tap="search">
 			<image src="../../../static/img/our/store/search.png" mode=""></image>
-			<input type="text" :value="search_text"/>
+			<input type="text" :value="search_text" @input='input_color'/>
 		</view>
 		<!-- 为你搜索到的类容 -->
 		<view class="search_list">
 			<view class="text">
 				为您搜索到
 			</view>
-			<view class="search_li" @tap='tab_searchm(1)'>
-				<image src="../../../static/img/index/erweima.png" mode=""></image>
+			<view class="search_li" @tap='tab_searchm(1)' v-for="(item,index) in color_list">
+				<image :src="item.image" mode=""></image>
 				<view class="phone">
-					14760716236
+					<text style="color: #eeab0e;">{{item.color_text}}</text>
+					<text>{{item.no_color_text}}</text>
 				</view>
 			</view>
 		</view>
@@ -25,15 +26,47 @@
 		data() {
 			return {
 				search_text:'',//搜索的类容
+				search_list:[
+					{
+						image:'../../../static/img/index/erweima.png',
+						text:'14760716236'
+					},
+					{
+						image:'../../../static/img/index/erweima.png',
+						text:'14589568521'
+					},
+					{
+						image:'../../../static/img/index/erweima.png',
+						text:'15698563247'
+					}
+				],
+				color_list:[],//截取有颜色的数组
+				color_text:'',//有颜色的文字
+				no_color_text:'',//没有颜色的文字
 			}
 		},
+		
 		methods: {
 			/* 跳转搜索页面 */
 			tab_searchm(){
 				uni.navigateTo({
 					url:'../search_info/search_info?id='+1
 				})
-			}
+			},
+			/* 搜索的类容与下面的匹配 */
+			input_color(e){
+				var lenght=e.detail.value.length;
+				var arr=[];
+				for(var i in this.search_list){
+					var json={};
+					json.image=this.search_list[i].image;
+					json.color_text=this.search_list[i].text.slice(0,lenght);
+					json.no_color_text=this.search_list[i].text.slice(lenght,12);
+					arr.push(json);
+				}
+				this.color_list=arr;
+				console.log(this.color_list);
+			},
 		}
 	}
 </script>
