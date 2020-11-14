@@ -20,26 +20,65 @@
 		</view>
 		<!-- 选择金额卡片 -->
 		<view class="card">
-			<view :class="current==index?'card_li  active':'card_li'"  v-for="(item,index) in 6" @tap='select_card(index)'>
+			<view :class="current==item.id?'card_li  active':'card_li'"  v-for="(item,index) in list" @tap='select_card(item)'>
 				<view class="" style="font-weight: bold;font-size: 16px;">
-					5元
+					{{item.title}}元
 				</view>
 				<view class="">
-					实际到账3.00元
+					实际到账{{item.money}}.00元
 				</view>
 			</view>
 
+		</view>
+		<view class="bot" @tap='save'>
+			提现
 		</view>
 	</view>
 </template>
 
 <script>
+	import {Withdrawal} from '../../../api/Index/index.js'
 	export default {
 		data() {
 			return {
 				telephone: '1476071626',
 				disabled: false,
 				current:0,
+				money:3,//提现的金额
+				list:[
+					{
+						id:0,
+						title:5,
+						money:3.00
+					},
+					{
+						id:1,
+						title:50,
+						money:48.00
+					},
+					{
+						id:2,
+						title:100,
+						money:98.00
+					},
+					{
+						id:3,
+						title:200,
+						money:198.00
+					},
+					{
+						id:4,
+						title:500,
+						money:498.00
+					},
+					{
+						id:5,
+						title:1000,
+						money:998.00
+					}
+	
+				],//提现金额
+				
 			}
 		},
 		methods: {
@@ -48,8 +87,33 @@
 				this.disabled = !this.disabled;
 			},
 			/* 卡片选择 */
-			select_card(index){
-				this.current=index;
+			select_card(item){
+				this.current=item.id;
+				this.money=item.money;
+			},
+			/* 点击提现 */
+			save(){
+				Withdrawal({
+					money:this.money,
+					token:uni.getStorageSync('token')
+				}).then(res=>{
+					if(res.code==1){
+						uni.showToast({
+							title:res.msg,
+							icon:'none',
+							success: () => {
+								uni.navigateBack({
+									delta:1
+								})
+							}
+						})
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:'none'
+						})
+					}
+				})
 			},
 		}
 	}
@@ -124,6 +188,18 @@
 				border: 1px solid #FA5F3E;
 				box-shadow: 0px 0px 16px 0px rgba(250, 95, 62, 0.2);
 			}
+		}
+		.bot{
+			width: 500rpx;
+			height: 80rpx;
+			line-height: 80rpx;
+			background: linear-gradient(87deg, #FFA25D, #FF4A16);
+			box-shadow: -1px 2px 5px 0px rgba(250, 95, 62, 0.6);
+			border-radius: 38rpx;
+			color: #FFFFFF;
+			text-align: center;
+			margin: 100rpx auto;
+
 		}
 	}
 </style>

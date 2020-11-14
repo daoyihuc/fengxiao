@@ -1,17 +1,17 @@
 <template>
 	<view class="content">
 		<!-- 手风琴效果 -->
-		<uni-collapse accordion="true">
+		<!-- <uni-collapse accordion="true">
 		    <uni-collapse-item title="问题类型">
 		        <view style="padding: 30rpx;">
 		            天天天天
 		        </view>
 		    </uni-collapse-item>
-		</uni-collapse>
+		</uni-collapse> -->
 		<!-- 表单提交 -->
 		<form @submit="onSubmit">  
 			<view class="li">
-				<textarea value="" placeholder="请描述您所遇到的问题..." />
+				<textarea value="" name='content' placeholder="请描述您所遇到的问题..." />
 			</view>
 			<view class="text">
 				0/200
@@ -28,6 +28,7 @@
 <script>
 	import uniCollapse from '@/components/uni-collapse/uni-collapse.vue'
 	import uniCollapseItem from '@/components/uni-collapse-item/uni-collapse-item.vue'
+	import {FeedBack} from '../../../api/our/our.js'
 	export default {
 		data() {
 			return {
@@ -39,6 +40,29 @@
 			/* 表单数据 */
 			onSubmit(e) {
 				console.log(e)
+				FeedBack({
+					token:uni.getStorageSync('token'),
+					content:e.detail.value.content,
+					images:this.image.split(',')[1]
+				}).then(res=>{
+					if(res.code==1){
+						uni.showToast({
+							title:res.msg,
+							icon:'none',
+							success: () => {
+								uni.navigateBack({
+									delta:1
+								})
+							}
+						})
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:'none'
+						})
+					}
+				})
+				
 			},
 			/* 上传照 */
 			select_img() {

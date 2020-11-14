@@ -12,20 +12,20 @@
 </template>
 
 <script>
-// import { setUserInfo,setToken } from "../../utils/auth";
+/* 接口名称 */
+	import {Logn} from "../../../api/Index/index.js"
+	
 export default {
   data() {
     return {
-      isCanUse: uni.getStorageSync('isCanUse'),
-      nickName: '',
-      avatarUrl: '',
       bgImg: ['https://6d61-matchbox-79a395-1302390714.tcb.qcloud.la/matchbox/img_flower_4.jpg', 'https://6d61-matchbox-79a395-1302390714.tcb.qcloud.la/matchbox/img_flower_1.jpg', 'https://6d61-matchbox-79a395-1302390714.tcb.qcloud.la/matchbox/img_flower_3.jpg', 'https://6d61-matchbox-79a395-1302390714.tcb.qcloud.la/matchbox/img_flower_2.jpg'],
       imgTime: '',
       imgIndex: 0,
-	  codeName: '验证码',
-      isCode: true,
-	  tel:'12345678912',
-	  smscode:'123456'
+	  code:'',//登录code
+	  gender:'',//性别
+	  nickname:'',//姓名
+	  avatar:'',//头像
+	  inviteuid:'',//邀请人id
     };
   },
 
@@ -81,12 +81,35 @@ export default {
   onShareAppMessage: function () {},
   methods: {
     getUserInfo() {
-      console.log('点了');
+		var that=this;
       let _this = this;
       uni.getUserInfo({
         provider: 'weixin',
-        success: function (infoRes) {
-          console.log(infoRes)
+        success:(infoRes)=>{
+			var data={
+				code:this.code,
+				gender:infoRes.userInfo.gender,
+				nickname:infoRes.userInfo.nickName,
+				avatar:infoRes.userInfo.avatarUrl,
+				inviteuid:1
+			};
+		  /* 调用登录*/
+		  Logn(data).then(res=>{
+			  if(res.code==1){
+				  uni.showToast({
+				  	title:res.msg,
+					icon:'none',
+					success: () => {
+						uni.setStorageSync('token',res.data.Token);
+						uni.setStorageSync('userInfo',res.data.UserInfo);
+						uni.navigateBack({
+							delta:1
+						})
+					}
+				  })
+			  }
+		  });
+		  
         },
 
         fail(res) {}
@@ -103,15 +126,15 @@ export default {
           imgIndex = 0;
         }
           this.imgIndex=imgIndex;
-      }, 10000);
+      }, 8000);
         this.imgTime=imgTime;
     },
 	wxlogin() {
 	  // 1.wx获取登录用户code
 	  uni.login({
 	    provider: 'weixin',
-	    success: function (loginRes) {
-	      console.log('这是用户的code', loginRes);
+	    success: (loginRes)=>{
+			this.code=loginRes.code;
 	    }
 	  });
 	},

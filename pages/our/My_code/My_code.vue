@@ -1,27 +1,52 @@
 <template>
 	<view class="content">
 		<view class="auto">
-			<image class="image_name" src="../../../static/img/index/erweima.png" mode=""></image>
+			<image class="image_name" :src="data.MemberInfo.avatar" mode=""></image>
 			<view class="name">
-				小仙女
+				{{data.MemberInfo.nickname}}
 			</view>
 			<view class="code">
 			   扫描下方二维码加我
 			</view>
-			<image class="image_code" src="../../../static/img/our/erweimaw.png" mode=""></image>
+			<image class="image_code" :src="data.erweima" mode=""></image>
 		</view>
+		<!-- 页面加载 -->
+		<loading v-if="isShow == true"></loading>
 	</view>
 </template>
 
 <script>
+	import loading from "../../../components/public/loading.vue";
+	import {MyCode} from '../../../api/our/our.js'
 	export default {
 		data() {
 			return {
-				
+				data:{},//所有数据
+				isShow: true,
 			}
 		},
+		onLoad() {
+			this.getdata();
+		},
 		methods: {
-			
+			getdata(){
+				MyCode({
+					token:uni.getStorageSync('token')
+				}).then(res=>{
+					if(res.code==1){
+						this.data=res.data;
+						this.isShow=false;
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:'none'
+						})
+					}
+				})
+			}
+		},
+		components:{
+			loading
 		}
 	}
 </script>

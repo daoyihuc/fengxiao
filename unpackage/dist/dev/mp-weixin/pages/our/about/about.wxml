@@ -1,1 +1,1 @@
-<view>关于什么</view>
+<view class="content">{{''+data.content+''}}</view>

@@ -3,13 +3,13 @@
 		<!-- 轮播图 -->
 		<view class="swiper">
 			<view class="swiper-box">
-				<swiper circular="true" @change="swiperChange" previous-margin="25px" next-margin="25px">
-					<swiper-item v-for="(item, index) in swiperList" :key="index">
-						<image :src="item.img" mode="scaleToFill" :class="currentSwiper !== index ?'swiper-item-side':''" lazy-load="true"></image>
+				<swiper circular="true" @change="swiperChange" previous-margin="30px" next-margin="30px">
+					<swiper-item v-for="(item, index) in SlideItem" :key="index">
+						<image :src="item.img" mode="" :class="currentSwiper !== index ?'swiper-item-side':''" lazy-load="true"></image>
 					</swiper-item>
 				</swiper>
 				<view class="indicator">
-					<view v-for="(item, index) in swiperList" :key="index" :class="currentSwiper >= index ? 'on' : 'dots'" :style="'width: ' + (currentSwiper >= index ? 100 / swiperList.length + '%' : '' )"></view>
+					<view v-for="(item, index) in SlideItem" :key="index" :class="currentSwiper >= index ? 'on' : 'dots'" :style="'width: ' + (currentSwiper >= index ? 100 / SlideItem.length + '%' : '' )"></view>
 				</view>
 			</view>
 		</view>
@@ -30,21 +30,21 @@
 			<text>推荐店铺</text>
 		</view>
 		<!-- 店铺详情 -->
-		<view class="title_top" v-for="(item,index) in 3">
+		<view class="title_top" v-for="(item,index) in StoreList" :key='index'>
 			<view class="left">
-				<image src="../../static/img/index/beijingh.png" mode=""></image>
+				<image :src="item.logo" mode=""></image>
 			</view>
 			<view class="right">
 				<view class="img_li">
-				     <text style="font-weight: 600;font-size: 15px;">万家丽店</text>
+				     <text style="font-weight: 600;font-size: 15px;">{{item.store_name}}</text>
 				</view>
 				<view class="img_li">
-				     <text>电话：14760716236</text>
+				     <text>电话：{{item.mobile}}</text>
 				</view>
 				<view class="img_li">
-				     <text>地址：开福区万达国际总部c3栋1005开福区万达国际总部c3栋1005</text>
+				     <text>地址：{{item.province}}{{item.city}}{{item.district}}{{item.address}}</text>
 				</view>
-				<view class="bot" @tap='store_url'>
+				<view class="bot" @tap='store_url(item)'>
 					查看
 				</view>
 				
@@ -55,12 +55,13 @@
 </template>
 
 <script>
+	import {Store} from '../../api/store/store.js'
 	export default {
 		data() {
 			return {
 				currentSwiper: 0,
 				swiperList: [{
-					img: '../../static/img/store/ban.png'
+					img: '../../static/img/store/ico_1.png'
 				}, {
 					img: '../../static/img/store/ban.png'
 				}, {
@@ -88,8 +89,21 @@
 						url:'County_agent/County_agent'
 					}
 				],
+				Page:1,//页面
+				SlideItem:[],//轮播图列表
+				StoreList:[],//门店列表
+				data:{},//所有数据
 
 			}
+		},
+		onLoad() {
+			/* 调用获取页面信息方法 */
+			this.getdata();
+		},
+		/* 上拉刷新 */
+		onReachBottom(){
+			this.Page++;
+			this.getdata();
 		},
 		methods: {
 			/* 轮播图 */
@@ -103,11 +117,29 @@
 				})
 			},
 			/* 门面详情 */
-			store_url(){
+			store_url(item){
 				uni.navigateTo({
-					url:'Store_info/Store_info'
+					url:'Store_info/Store_info?id='+item.id
 				})
 			},
+			/* 获取页面数据*/
+			getdata(){
+				Store({
+					Page:this.Page
+				}).then(res=>{
+					if(res.code==1){
+						this.data=res.data;
+						this.SlideItem=res.data.SlideItem;
+						this.StoreList=[...this.StoreList,...res.data.StoreList.List];
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:"none"
+						})
+					}
+				})
+			},
+			
 		}
 	}
 </script>
@@ -142,19 +174,21 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			margin: 0 10rpx;
 		}
 
 		.swiper-box swiper swiper-item image {
-			width: 100%;
-			height: 50vw;
+			width: 95%;
+			height: 45vw;
 			margin: 0 auto;
 			display: block;
 			transition: height .3s;
+			border-radius: 20rpx;
 		}
 
 		.swiper-item-side {
 			width: 100%;
-			height: 45vw !important;
+			height: 40vw !important;
 			transition: height .3s;
 		}
 

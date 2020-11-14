@@ -8,79 +8,54 @@
 <script>
 	import loading from "../../../components/public/loading.vue";
 	import Lists from "../../../components/Lists/Lists.vue";
+	/* 接口 */
+	import {WithdrawalList} from '../../../api/Index/index.js'
 	export default {
 		data() {
 			return {
-				logList: [
-					{
-						time:'2020-10-25',
-						title:'提现',
-						money:'50'
-					},
-					{
-						time:'2020-10-25',
-						title:'提现',
-						money:'50'
-					},
-					{
-						time:'2020-10-25',
-						title:'提现',
-						money:'50'
-					}
-				],
-				isShow: true
+				logList: [],
+				isShow: true,
+				Page:1,//页码
+				data:[],//所有数据
 			};
 		},
-
+		onLoad: function(options) {
+			this.getdata();
+		},
+		onReachBottom: function() {
+			this.Page++;
+			this.getdata();
+		},
+		methods: {
+			/* 获取所有数据 */
+			getdata(){
+				WithdrawalList({
+					Page:this.Page,
+					token:uni.getStorageSync('token')
+				}).then(res=>{
+					if(res.code==1){
+						this.data=res.data.List;
+						this.isShow = false;
+						var arr=[];
+						for(var i in this.data){
+							var json={};
+							json.time=this.data[i].dateline;
+							json.title='提现';
+							json.money=this.data[i].money;
+							json.statust=this.data[i].status;
+							arr.push(json);
+						}
+						this.logList=[...this.logList,...arr];
+					}
+				})
+			}
+					
+		},
 		components: {
 			loading,
 			Lists
 		},
-
-		/**
-		 * 生命周期函数--监听页面加载
-		 */
-		onLoad: function(options) {
-			setTimeout(() => {
-				this.isShow = false
-			}, 600);
-		},
-
-		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
-
-		/**
-		 * 生命周期函数--监听页面显示
-		 */
-		onShow: function() {},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
-
-		/**
-		 * 用户点击右上角分享
-		 */
-		onShareAppMessage: function() {},
-		methods: {}
+		
 	};
 </script>
 <style scoped lang="scss">

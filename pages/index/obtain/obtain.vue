@@ -8,82 +8,56 @@
 <script>
 	import loading from "../../../components/public/loading.vue";
 	import Lists from "../../../components/Lists/Lists.vue";
+	import { RecurrenceRecord} from '../../../api/Index/index.js'
 	export default {
 		data() {
 			return {
-				logList: [
-					{
-						time:'2020-10-25',
-						title:'万家丽',
-						money:'50',
-						statust:'1'
-					},
-					{
-						time:'2020-10-25',
-						title:'开福区',
-						money:'50',
-						statust:'1'
-					},
-					{
-						time:'2020-10-25',
-						title:'万达',
-						money:'50',
-						statust:'1'
-					}
-				],
-				isShow: true
+				logList: [],
+				isShow: true,
+				Page:1,//页码
+				data:[],//所有数据
 			};
 		},
-
-		components: {
-			loading,
-			Lists
-		},
-
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
-			setTimeout(() => {
-				this.isShow = false
-			}, 600);
+			this.getdata();
+		},
+		onReachBottom: function() {
+			this.Page++;
+			this.getdata();
 		},
 
-		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
-
-		/**
-		 * 生命周期函数--监听页面显示
-		 */
-		onShow: function() {},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
-
-		/**
-		 * 用户点击右上角分享
-		 */
-		onShareAppMessage: function() {},
-		methods: {}
+		methods: {
+			/* 获取所有数据 */
+			getdata(){
+				RecurrenceRecord({
+					Page:this.Page,
+					token:uni.getStorageSync('token')
+				}).then(res=>{
+					if(res.code==1){
+						this.data=res.data.List;
+						this.isShow = false;
+						var arr=[];
+						for(var i in this.data){
+							var json={};
+							json.time=this.data[i].dateline;
+							json.title=this.data[i].StoreName;
+							json.money=this.data[i].money;
+							json.statust=3;
+							arr.push(json);
+						}
+						this.logList=[...this.logList,...arr];
+					}
+				})
+			}
+		
+		},
+		components: {
+			loading,
+			Lists
+		},
 	};
 </script>
 <style scoped lang="scss">

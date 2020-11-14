@@ -8,10 +8,10 @@
 				</view>
 				<view class="right">
 					<view>-{{item.money}}</view>
-					<view class="time" v-if="item.statust==1">已冻结</view>
+					<view class="time">{{item.statust==0?'待审核':item.statust==1?'审核成功':item.statust==2?'审核失败':''}}</view>
 				</view>
 			</view>
-			<view class="nodata" v-if="logList.length >= 6">—— 到底啦 ——</view>
+			<!-- <view class="nodata" v-if="logList.length >= 6">—— 到底啦 ——</view> -->
 		</view>
 		<nodata :colors="colors" title="暂无明细" v-if="logList.length == 0"></nodata>
 	</view>

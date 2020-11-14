@@ -12,8 +12,11 @@
 			</view>
 			<view :class="gray==1?'left active':'left'">
 				<image :class="gray==1?'active':''" src="../../../static/img/store/shenhe2.png" mode=""></image>
-				<view class="name">
+				<view class="name" v-if="status!=2">
 					等待审核
+				</view>
+				<view class="name" else>
+					审核通过
 				</view>
 			</view>
 		</view>
@@ -21,7 +24,7 @@
 		<form @submit="onSubmit" v-if="gray==1">  
 			<view class="li">
 				<text>门店名称</text>
-				<input type="text" :value="name" :name="name" placeholder="请填写门店名称" />
+				<input type="text" :value="name" name="StoreName" placeholder="请填写门店名称" />
 			</view>
 			<view class="li">
 				<text>门店地址</text>
@@ -31,11 +34,11 @@
 				<image src="../../../static/img/store/dizhi11.png" mode=""></image>
 			</view>
 			<view class="li">
-				<textarea value="" placeholder="填写详细地址" />
+				<textarea value="" placeholder="填写详细地址" name='Address'/>
 			</view>
 			<view class="li">
 				<text>门店电话</text>
-				<input type="text" :value="name" :name="name" placeholder="请填写门店电话" />
+				<input type="text" :value="name" name="Mobile" placeholder="请填写门店电话" />
 			</view>
 			<view class="">
 				<text style="font-size: 14px;padding: 30rpx;">营业执照</text>
@@ -52,14 +55,18 @@
 		<!-- 等待审核 -->
 		<view class="wait" v-if="gray==0">
 			<image src="../../../static/img/store/quesheng1.png" mode=""></image>
-	         <view class="text">
+	         <view class="text" v-if="status!=2">
 	         	信息审核需要1-3天噢，请耐心等待~
-	         </view>	
+	         </view>
+				 <view class="text" else>
+				 	审核通过
+				 </view>	
 		</view>
 	</view>
 </template>
 
 <script>
+	import { StoreEntry,StoreStatus} from '../../../api/store/store.js'
 	export default {
 		data() {
 			return {
@@ -69,12 +76,65 @@
 				image:'../../../static/img/store/zhengmianz.png',
 				img_arr:[],
 				name:'',
+				status:null,//审核的状态
 			}
 		},
+		onLoad() {
+			this.getStatus();
+		},
 		methods: {
+			/* 审核状态 */
+			getStatus(){
+				StoreStatus({
+					token:uni.getStorageSync('token')
+				}).then(res=>{
+					if(res.code==1){
+					    this.status=res.data.status;
+						if(res.data.status==1){
+							this.gray=0;
+						}else if(res.data.status==2){
+							this.gray=0;
+						}else if(res.data.status==3){
+							this.gray=1;
+							uni.showToast({
+								title:'审核不通过请重新审核',
+								icon:'none'
+							})
+						}
+					}
+				})
+			},
 			/* 表单数据 */
 			onSubmit(e) {
 				console.log(e)
+				var data={
+					token:uni.getStorageSync('token'),
+					StoreName:e.detail.value.StoreName,//门店名
+					Address:e.detail.value.Address,//详细地址
+					Mobile:e.detail.value.Mobile,//Mobile
+					BusinesLicense:this.image.split(',')[1],//营业执照
+					Province:this.address.split(',')[0],
+					City:this.address.split(',')[1],
+					District:this.address.split(',')[2]
+				};
+				StoreEntry(data).then(res=>{
+					if(res.code==0){
+						uni.showToast({
+							title:res.msg,
+							icon:'none',
+							success: () => {
+								this.gray=0;
+							}
+						})
+						
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:'none'
+						})
+					}
+				})
+	
 			},
 			/* 地址选择 */
 			bindPickerChange(e){

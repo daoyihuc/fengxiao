@@ -12,7 +12,7 @@
 			</view>
 			<view class="center">
 				<view class="center_left">
-					54654.00
+				{{data.BagBalance}}
 				</view>
 				<view class="center_right" @tap='Withdrawal'>
 					提现
@@ -40,15 +40,15 @@
 				<text>近期消费</text>
 			</view>
 			<view class="card_list">
-				<view class="card_li" v-for="(item,index) in 10" :key='index' @tap='store_info'>
+				<view class="card_li" v-for="(item,index) in List" :key='index' @tap='store_info(item)'>
 					<view class="card_li_left">
 						<view class="">
 							<image src="../../static/img/index/dianpu.png" mode=""></image>
-							<text>万家丽店</text>
+							<text>{{item.store_name}}</text>
 						</view>
 						<view class="text">
 							<image src="../../static/img/index/dizhi.png" mode=""></image>
-							<text>开福区万达国际c3栋1005开福区万达国际c3栋1005开福区万达国际c3栋1005</text>
+							<text>{{item.address}}</text>
 						</view>
 					</view>
 					<view class="card_li_center">
@@ -56,10 +56,10 @@
 					</view>
 					<view class="card_li_right">
 						<view class="bot_top">
-							剩余：2000
+							剩余：{{item.ResidualIntegral}}
 						</view>
 						<view class="bot_top active">
-							积分：2000
+							积分：{{item.ConsumptionPoints}}
 						</view>
 					</view>
 				</view>
@@ -77,20 +77,30 @@
 	 export default{
 		data() {
 			return {
-				isShow: true
+				isShow: true,
+				data:{},//所有数据
+				List:[],//门店列表
 			}
 		},
-		onLoad() {
-			getIndexData({
-				district_name: '开福区'
-			}).then(res => {
-				console.log(res)
-			})
-	
-			setTimeout(() => {
-				this.isShow = false
-			}, 1000)
-	
+		// onLoad() {
+		// 	this.List=[];
+		// 	this.getdata();
+		// },
+		onShow() {
+			this.List=[];
+			this.getdata();
+		},
+		/* 下拉刷新 */
+		onPullDownRefresh(){
+			this.Page=1;
+			this.List=[];
+			this.getdata();
+		},
+		/* 上拉刷新 */
+		onReachBottom(){
+			this.Page++;
+			this.List=[];
+			this.getdata();
 		},
 		methods: {
 			/* 提现跳转 */
@@ -112,11 +122,30 @@
 				})
 			},
 			/* 房屋跳转 */
-			store_info() {
+			store_info(item) {
 				uni.navigateTo({
-					url: 'store_info/store_info'
+					url: 'store_info/store_info?id='+item.id
 				})
 			},
+			/* 调用接口卡包 */
+			getdata(){
+				getIndexData({
+					token:uni.getStorageSync('token'),
+					Page:this.Page
+				}).then(res => {
+					if(res.code==1){
+						this.isShow = false;
+						uni.stopPullDownRefresh();
+						this.data=res.data;
+						this.List=[...this.List,...res.data.List.List];
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:'none'
+						})
+					}
+				})
+			}
 	
 		},
 		components: {

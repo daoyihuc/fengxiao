@@ -58,4 +58,15 @@
           align-items: center;
   color: #a5a5a5;
 }
+.content .bot {
+  -webkit-border-radius: 40rpx;
+          border-radius: 40rpx;
+  border: 1px solid #E5E5E5;
+  color: #F0AD4E;
+  width: 200rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  margin: 100rpx auto;
+}
 

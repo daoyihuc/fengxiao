@@ -1,42 +1,72 @@
 <template>
 	<view class="content">
-		<!-- 店铺详情 -->
-		<view class="title_top" v-for="(item,index) in 3">
-			<view class="left">
-				<image src="../../../static/img/index/beijingh.png" mode=""></image>
-			</view>
-			<view class="right">
-				<view class="img_li">
-				     <text style="font-weight: 600;font-size: 15px;">万家丽店</text>
-				</view>
-				<view class="img_li">
-				     <text>电话：14760716236</text>
-				</view>
-				<view class="img_li">
-				     <text>地址：开福区万达国际总部c3栋1005开福区万达国际总部c3栋1005</text>
-				</view>
-				<view class="bot" @tap='store_url'>
-					查看
-				</view>
-				
-			</view>
+	<!-- 店铺详情 -->
+	<view class="title_top" v-for="(item,index) in StoreList" :key='index'>
+		<view class="left">
+			<image :src="item.logo" mode=""></image>
 		</view>
-		
+		<view class="right">
+			<view class="img_li">
+			     <text style="font-weight: 600;font-size: 15px;">{{item.store_name}}</text>
+			</view>
+			<view class="img_li">
+			     <text>电话：{{item.mobile}}</text>
+			</view>
+			<view class="img_li">
+			     <text>地址：{{item.province}}{{item.city}}{{item.district}}{{item.address}}</text>
+			</view>
+			<view class="bot" @tap='store_url(item)'>
+				查看
+			</view>
+			
+		</view>
+	</view>
+	
 	</view>
 </template>
 
 <script>
+	import loading from "../../../components/public/loading.vue";
+	import { StoreList} from '../../../api/store/store.js'
 	export default {
 		data() {
 			return {
-				
+				isShow: true,
+				Page:1,//页面
+				StoreList:[],//门店列表
+				data:{},//所有数据
 			}
+		},
+		onLoad() {
+			/* 调用获取页面信息方法 */
+			this.getdata();
+		},
+		/* 上拉刷新 */
+		onReachBottom(){
+			this.Page++;
+			this.getdata();
 		},
 		methods: {
 			/* 门面详情 */
-			store_url(){
+			store_url(item){
 				uni.navigateTo({
-					url:'../Store_info/Store_info'
+					url:'../Store_info/Store_info?id='+item.id
+				})
+			},
+			/* 获取页面数据*/
+			getdata(){
+				StoreList({
+					Page:this.Page
+				}).then(res=>{
+					if(res.code==1){
+						this.data=res.data;
+						this.StoreList=[...this.StoreList,...res.data.List];
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:"none"
+						})
+					}
 				})
 			},
 		}

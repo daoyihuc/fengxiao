@@ -4,7 +4,7 @@
  * request('接口名称',{key:value},'请求方式(默认为GET)')
  * .then(res=>{console.log(res)})
  */
-let baseUrl = 'https://www.jhzfmf.com/';
+let baseUrl = 'https://door.sh997.com/';
 export default async  function request(mehtod, params, type, callBack) {
   //创建一个名为request请求的方法函数
   if (!type) {

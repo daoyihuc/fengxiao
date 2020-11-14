@@ -62,7 +62,6 @@
   font-size: 18px;
 }
 .content .top_bg .user_info .left image {
-  padding: 0 10rpx;
   width: 100rpx;
   height: 100rpx;
   -webkit-border-radius: 50%;

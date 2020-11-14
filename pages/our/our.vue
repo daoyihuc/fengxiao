@@ -4,7 +4,7 @@
 			<view class="top">我的</view>
 			<view class="user_info">
 				<view class="left">
-					<image src="../../static/img/index/erweima.png" mode=""></image>
+					<image :src="data.avatar" mode=""></image>
 				    <text v-if="name!='' ">{{name}}</text>
 					 <text v-else @tap='log'>请登录</text>
 				</view>
@@ -18,7 +18,7 @@
 			<view class="left">
 				<image src="../../static/img/our/jifen.png" mode=""></image>
 				<text>我的积分</text>
-				<text>150.00</text>
+				<text>{{score}}</text>
 			</view>
 			<view class="row">
 				
@@ -26,7 +26,7 @@
 			<view class="left">
 				<image src="../../static/img/our/jifen2.png" mode=""></image>
 				<text>我的积分</text>
-				<text>150.00</text>
+				<text>{{fronzen_score}}</text>
 			</view>
 		</view>
 		<view class="tab_list">
@@ -64,10 +64,11 @@
 </template>
 
 <script>
+	import {getinfot} from '../../api/Index/index.js'
 	export default {
 		data() {
 			return {
-				name:'',
+				name:'',//用户名
 				our_list_one:[
 					{
 						title:'我的二维码',
@@ -92,7 +93,16 @@
 						url:'opinion/opinion'
 					}
 				],
+				data:{},//所以信息
+				score:'',//积分
+				fronzen_score:'',//冻结积分
 			}
+		},
+		onLoad() {
+			this.getdata();
+		},
+		onShow() {
+			this.getdata();
 		},
 		methods: {
 			/* 点击跳转 */
@@ -126,6 +136,23 @@
 				uni.navigateTo({
 					url:'logn/logn'
 				})
+			},
+			/* 获取个人信息 */
+			getdata(){
+				this.score=uni.getStorageSync('userInfo').score;
+				this.fronzen_score=uni.getStorageSync('userInfo').fronzen_score;
+				console.log(this.fronzen_score);
+				getinfot({token:uni.getStorageSync('token')}).then((res)=>{
+					if(res.code==1){
+						this.data=res.data;
+						this.name=res.data.id;
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:'none'
+						})
+					}
+				})
 			}
 			
 		}
@@ -158,7 +185,7 @@
 					align-items: center;
 					font-size: 18px;
 					image{
-						padding: 0 10rpx;
+						// padding: 0 10rpx;
 						width: 100rpx;
 						height: 100rpx;
 						border-radius: 50%;

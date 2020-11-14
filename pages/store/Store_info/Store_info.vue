@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<view class="top_img">
+		<view class="top_img" :style="'background:url('+data.images+');background-repeat: no-repeat;background-size: 100% 100%;'">
 			<image src="../../../static/img/store/left.png" mode="" @tap="black"></image>
 			<text>门店</text>
 		</view>
@@ -8,13 +8,13 @@
 		<view class="store">
 			<view class="left">
 				<view class="store_name">
-					莫格(moge)万家丽长沙门店
+					{{data.store_name}}
 				</view>
 				<view class="text_li">
-					长沙市开福区万达国际总部C3栋1005
+					{{data.province}}{{data.city}}{{data.district}}{{data.address}}
 				</view>
 				<view class="text_li">
-					联系电话：15857772121
+					联系电话：{{data.mobile}}
 				</view>
 			</view>
 			<view class="right" @tap='share'>
@@ -27,17 +27,7 @@
 			<text>门店介绍</text>
 		</view>
 		<view class="info">
-
-			门店简介门店简介门店简介门店简介门店简介门店简介门店
-			简介门店简介门店简介门店简介门店简介门店简介门店简介
-			门店简介门店简介门店简介门店简介门店简介门店简介门店
-			简介门店简介门店简介门店简介门店简介门店简介门店简介
-			门店简介门店简介门店简介门店
-			简介门店简介门店简介门店简介门店简介门店简介门店简介
-			门店简介门店简介门店简介门店简介门店简介门店简介门店
-			简介门店简介门店简介门店简介门店简介门店简介门店简介
-			门店简介门店简介门店简介门店
-
+			{{data.desc}}
 		</view>
 
 		<!-- 页面加载 -->
@@ -47,29 +37,47 @@
 
 <script>
 	import loading from "../../../components/public/loading.vue";
+	import { StoreDetail } from '../../../api/store/store.js'
 	export default {
 		data() {
 			return {
-				isShow: true
+				isShow: true,
+				id:null,//门店id
+				data:{},//所有数据
 			}
 		},
-		onLoad() {
-			setTimeout(() => {
-				this.isShow = false
-			}, 1000)
-
+		onLoad(e) {
+			this.id=e.id;
+			this.getdata();
 		},
 		methods: {
 			/* 分享 */
 			share() {
 				uni.navigateTo({
-					url: '../store_share/store_share'
+					url: '../store_share/store_share?id='+this.id
 				})
 			},
 			/* 返回 */
 			black() {
 				uni.navigateBack({
 					delta: 1
+				})
+			},
+			/* 获取门店详情信息 */
+			getdata(){
+				StoreDetail({
+					token:uni.getStorageSync('token'),
+					StoreId:this.id
+				}).then(res=>{
+					if(res.code==1){
+						this.data=res.data;
+						this.isShow = false;
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:"none"
+						})
+					}
 				})
 			},
 
@@ -85,8 +93,8 @@
 		.top_img {
 			width: 100%;
 			height: 400rpx;
-			background: url(https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=339984553,3509384023&fm=26&gp=0.jpg) no-repeat;
-			background-size: 100% 100%;
+			// background: url(https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=339984553,3509384023&fm=26&gp=0.jpg) no-repeat;
+			
 			display: flex;
 			padding: 50rpx 0;
 			font-size: 20px;
