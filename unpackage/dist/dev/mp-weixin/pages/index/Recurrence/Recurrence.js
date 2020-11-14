@@ -158,6 +158,7 @@ var _index = __webpack_require__(/*! ../../../api/Index/index.js */ 8);function 
   },
   onReachBottom: function onReachBottom() {
     this.Page++;
+    this.list = [];
     this.getdata();
   },
   methods: {

@@ -130,70 +130,84 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _store = __webpack_require__(/*! ../../../api/store/store.js */ 30);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var _default =
 {
   data: function data() {
-    return {};
+    return {
+      county_agent: null, //是否是代理
+      Page: 1, //页面
+      StoreList: [], //门店列表
+      data: {} //所有数据
+    };
 
-
+  },
+  onLoad: function onLoad() {
+    this.county_agent = uni.getStorageSync('county_agent');
+    this.getdata();
+  },
+  /* 上拉刷新 */
+  onReachBottom: function onReachBottom() {
+    this.Page++;
+    this.getdata();
   },
   methods: {
     /* 门面详情 */
-    store_url: function store_url() {
+    store_url: function store_url(item) {
       uni.navigateTo({
-        url: '../Store_info/Store_info' });
+        url: '../Store_info/Store_info?id=' + item.id });
 
     },
     /* 收益 */
@@ -201,6 +215,23 @@ var _default =
       uni.navigateTo({
         url: '../profit/profit' });
 
+    },
+    /* 获取页面数据*/
+    getdata: function getdata() {var _this = this;
+      (0, _store.CountyGgent)({
+        token: uni.getStorageSync('token'),
+        Page: this.Page }).
+      then(function (res) {
+        if (res.code == 0) {
+          _this.data = res.data;
+          _this.StoreList = [].concat(_toConsumableArray(_this.StoreList), _toConsumableArray(res.data.List));
+        } else {
+          uni.showToast({
+            title: res.msg,
+            icon: "none" });
+
+        }
+      });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

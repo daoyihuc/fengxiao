@@ -82,14 +82,14 @@
 				List:[],//门店列表
 			}
 		},
-		// onLoad() {
-		// 	this.List=[];
-		// 	this.getdata();
-		// },
-		onShow() {
+		onLoad() {
 			this.List=[];
 			this.getdata();
 		},
+		// onShow() {
+		// 	this.List=[];
+		// 	this.getdata();
+		// },
 		/* 下拉刷新 */
 		onPullDownRefresh(){
 			this.Page=1;
@@ -124,7 +124,7 @@
 			/* 房屋跳转 */
 			store_info(item) {
 				uni.navigateTo({
-					url: 'store_info/store_info?id='+item.id
+					url: 'store_info/store_info?id='+item.store_id
 				})
 			},
 			/* 调用接口卡包 */

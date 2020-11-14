@@ -8839,7 +8839,7 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.StoreEntry = StoreEntry;exports.StoreStatus = StoreStatus;exports.Store = Store;exports.StoreDetail = StoreDetail;exports.StoreList = StoreList;exports.StoreShare = StoreShare;var _request = _interopRequireDefault(__webpack_require__(/*! ../../utils/request.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.StoreEntry = StoreEntry;exports.StoreStatus = StoreStatus;exports.Store = Store;exports.StoreDetail = StoreDetail;exports.StoreList = StoreList;exports.StoreShare = StoreShare;exports.CountyGgent = CountyGgent;var _request = _interopRequireDefault(__webpack_require__(/*! ../../utils/request.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 /* 门店入驻接口 */
 function StoreEntry(data) {
@@ -8869,6 +8869,10 @@ function StoreList(data) {
 /* 门店分享接口，获取门店小程序码 */
 function StoreShare(data) {
   return (0, _request.default)('StoreShare', data);
+}
+/* 县级代理接口 */
+function CountyGgent(data) {
+  return (0, _request.default)('CountyGgent', data);
 }
 
 /***/ }),
@@ -9064,7 +9068,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.Logn = Logn;exports.getIndexData = getIndexData;exports.RecurrenceRecord = RecurrenceRecord;exports.Withdrawal = Withdrawal;exports.WithdrawalList = WithdrawalList;exports.getinfot = getinfot;exports.EditMine = EditMine;var _request = _interopRequireDefault(__webpack_require__(/*! ../../utils/request.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.Logn = Logn;exports.getIndexData = getIndexData;exports.RecurrenceRecord = RecurrenceRecord;exports.Withdrawal = Withdrawal;exports.WithdrawalList = WithdrawalList;exports.ConsumptionDetails = ConsumptionDetails;exports.getinfot = getinfot;exports.EditMine = EditMine;var _request = _interopRequireDefault(__webpack_require__(/*! ../../utils/request.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 /* 登录 */
 function Logn(data) {
@@ -9089,7 +9093,10 @@ function Withdrawal(data) {
 function WithdrawalList(data) {
   return (0, _request.default)('WithdrawalList', data);
 }
-
+/* 卡包消费详情接口 */
+function ConsumptionDetails(data) {
+  return (0, _request.default)('ConsumptionDetails', data);
+}
 
 
 /* 个人信息接口 */

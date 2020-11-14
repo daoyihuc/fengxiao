@@ -2,31 +2,57 @@
 	<view class="content">
 		<view class="title_top">
 			<view class="left">
-				<image src="../../../static/img/index/beijingh.png" mode=""></image>
+				<image :src="data.StoreInfo.logo" mode=""></image>
 			</view>
 			<view class="right">
 				<view class="img_li">
 					<image src="../../../static/img/index/dianpu.png" mode=""></image>
-				     <text>万家丽店</text>
+				     <text>{{data.StoreInfo.store_name}}</text>
 				</view>
 				<view class="img_li">
 					<image src="../../../static/img/index/dizhi.png" mode=""></image>
-				     <text>开福区万达国际总部c3栋1005开福区万达国际总部c3栋1005</text>
+				     <text>
+					{{data.StoreInfo.province}}{{data.StoreInfo.city}}{{data.StoreInfo.district}}{{data.StoreInfo.address}}
+					 </text>
 				</view>
 				<view class="text_small">
 					<view class="small_left">
-						剩余：<text>2000</text>
+						剩余：<text>{{data.ResidualIntegral}}</text>
 					</view>
 					<view class="small_left">
-						总消费：<text>2000</text>
+						总消费：<text>{{data.ConsumptionPoints}}</text>
 					</view>
 				</view>
-				<view class="text_smalls" v-for="(item,index) in 4">
+				<view class="text_smalls">
 					<view class="small_left">
 						已消费(三个月内)：
 					</view>
 					<view class="small_left">
-						<text>2000</text>
+						<text>{{data.ThreeTotalMoney}}</text>
+					</view>
+				</view>
+				<view class="text_smalls">
+					<view class="small_left">
+						距离返现相差金额：
+					</view>
+					<view class="small_left">
+						<text>{{data.ThreeTotalOtherMoney}}</text>
+					</view>
+				</view>
+				<view class="text_smalls">
+					<view class="small_left">
+						失效金额(三个月内)：
+					</view>
+					<view class="small_left">
+						<text>{{data.InvalidAmount}}</text>
+					</view>
+				</view>
+				<view class="text_smalls">
+					<view class="small_left">
+						失效时间(三个月内)：
+					</view>
+					<view class="small_left">
+						<text>{{data.invalid_endtime}}</text>
 					</view>
 				</view>
 				
@@ -49,35 +75,58 @@
 <script>
 	import loading from "../../../components/public/loading.vue";
 	import Lists from "../../../components/Lists/Lists.vue";
+	/* 接口 */
+	import {ConsumptionDetails} from "../../../api/Index/index.js"
 	export default {
 		data() {
 			return {
-				logList: [
-					{
-						time:'2020-10-25',
-						title:'万家丽',
-						money:'50'
-					},
-					{
-						time:'2020-10-25',
-						title:'开福区',
-						money:'50'
-					},
-					{
-						time:'2020-10-25',
-						title:'万达',
-						money:'50'
-					}
-				],
-				isShow: true
+				logList: [],
+				isShow: true,
+				StoreId:null,//门店ID
+				Page:1,//页面
+				list:[],//类别
+				data:{},
 			}
 		},
-		onLoad() {
-			setTimeout(() => {
-				this.isShow = false
-			}, 600);
+		onLoad(e) {
+			this.StoreId=e.id;
+			this.getdata();
+		},
+		onReachBottom() {
+			this.Page++;
+			this.list=[];
+			this.getdata();
 		},
 		methods: {
+			/* 获取页面数据 */
+			getdata(){
+				ConsumptionDetails({
+					StoreId:this.StoreId,
+					Page:this.Page,
+					token:uni.getStorageSync('token')
+				}).then(res=>{
+					if(res.code==1){
+						this.isShow=false;
+						this.data=res.data;
+						this.list=res.data.OrderList.List;
+						var arr=[];
+						for(var i in this.list){
+							var json={};
+							json.time=this.list[i].dateline;
+							json.title=this.list[i].StoreName;
+							json.money=this.list[i].amount;
+							json.statust=3;
+							arr.push(json);
+						}
+						this.logList=[...this.logList,...arr];
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:'none'
+						})
+					}
+				})
+			},
 			
 		},
 		components:{
@@ -91,7 +140,7 @@
 	.content{
 		.title_top{
 			display: flex;
-			justify-content: space-between;
+			// justify-content: space-between;
 			padding: 20rpx;
 			border-top: 1px solid #eee;
 			color: #4d4d47;
@@ -101,8 +150,9 @@
 				height: 450rpx;
 			}
 			.right{
-				padding-left: 10rpx;
+				padding-left: 50rpx;
 				.img_li{
+					width: 330rpx;
 					font-size: 15px;
 					padding-top: 20rpx;
 					overflow: hidden;
@@ -110,19 +160,21 @@
 					display: -webkit-box;
 					-webkit-line-clamp: 1;
 					-webkit-box-orient: vertical;
+					display: flex;
 					image{
 						width: 30rpx;
 						height: 30rpx;
+						padding: 5rpx;
 					}
 					text{
-						padding-left: 15rpx;
+						// padding-left: 15rpx;
 					}
 				}
 				.text_small{
 					display: flex;
 					font-size: 12px;
 					justify-content: space-between;
-					padding: 20rpx 0; 
+					padding: 20rpx 0rpx; 
 					border-bottom: 1px solid #f1f1f1;
 					text{
 						color: rgba(250, 95, 62, .9);

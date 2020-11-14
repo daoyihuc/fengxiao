@@ -129,6 +129,7 @@
 				}).then(res=>{
 					if(res.code==1){
 						this.data=res.data;
+						uni.setStorageSync('county_agent',res.data.county_agent);
 						this.SlideItem=res.data.SlideItem;
 						this.StoreList=[...this.StoreList,...res.data.StoreList.List];
 					}else{

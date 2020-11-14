@@ -63,6 +63,7 @@
 				width: 150rpx;
 				height: 150rpx;
 				margin-top: -50rpx;
+				border-radius: 50%;
 			}
 			.image_code{
 				width: 400rpx;

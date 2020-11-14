@@ -261,6 +261,7 @@ var _store = __webpack_require__(/*! ../../api/store/store.js */ 30);function _t
       then(function (res) {
         if (res.code == 1) {
           _this.data = res.data;
+          uni.setStorageSync('county_agent', res.data.county_agent);
           _this.SlideItem = res.data.SlideItem;
           _this.StoreList = [].concat(_toConsumableArray(_this.StoreList), _toConsumableArray(res.data.StoreList.List));
         } else {

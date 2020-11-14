@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<view class="" v-if="true">
+		<view class="" v-if="county_agent==0">
 			<view class="card_top">
 				<view class="left">
 					<view class="row">
@@ -16,28 +16,28 @@
 				</view>
 			</view>
 			<!-- 店铺详情 -->
-			<view class="title_top" v-for="(item,index) in 3">
+			<view class="title_top" v-for="(item,index) in StoreList" :key='index'>
 				<view class="left">
-					<image src="../../../static/img/index/beijingh.png" mode=""></image>
+					<image :src="item.logo" mode=""></image>
 				</view>
 				<view class="right">
 					<view class="img_li">
-						<text style="font-weight: 600;font-size: 15px;">万家丽店</text>
+					     <text style="font-weight: 600;font-size: 15px;">{{item.store_name}}</text>
 					</view>
 					<view class="img_li">
-						<text>电话：14760716236</text>
+					     <text>电话：{{item.mobile}}</text>
 					</view>
 					<view class="img_li">
-						<text>地址：开福区万达国际总部c3栋1005开福区万达国际总部c3栋1005</text>
+					     <text>地址：{{item.district}}</text>
 					</view>
-					<view class="bot" @tap='store_url'>
+					<view class="bot" @tap='store_url(item)'>
 						查看
 					</view>
-
+					
 				</view>
 			</view>
 		</view>
-		<view class="agent_img" v-if="false">
+		<view class="agent_img" v-if="county_agent==0">
 			<image src="../../../static/img/store/quesheng2.png" mode=""></image>
 			<view class="agent_name">
 				您还不是县级代表，联系客服获取权限~
@@ -51,17 +51,31 @@
 </template>
 
 <script>
+	import {CountyGgent} from '../../../api/store/store.js'
 	export default {
 		data() {
 			return {
+				county_agent:null,//是否是代理
+				Page:1,//页面
+				StoreList:[],//门店列表
+				data:{},//所有数据
 
 			}
 		},
+		onLoad() {
+			this.county_agent=uni.getStorageSync('county_agent');
+			this.getdata();
+		},
+		/* 上拉刷新 */
+		onReachBottom(){
+			this.Page++;
+			this.getdata();
+		},
 		methods: {
 			/* 门面详情 */
-			store_url() {
+			store_url(item) {
 				uni.navigateTo({
-					url: '../Store_info/Store_info'
+					url:'../Store_info/Store_info?id='+item.id
 				})
 			},
 			/* 收益 */
@@ -69,7 +83,24 @@
 				uni.navigateTo({
 					url: '../profit/profit'
 				})
-			}
+			},
+			/* 获取页面数据*/
+			getdata(){
+				CountyGgent({
+					token:uni.getStorageSync('token'),
+					Page:this.Page
+				}).then(res=>{
+					if(res.code==0){
+						this.data=res.data;
+						this.StoreList=[...this.StoreList,...res.data.List];
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:"none"
+						})
+					}
+				})
+			},
 		}
 	}
 </script>
@@ -115,7 +146,7 @@
 
 	.title_top {
 		display: flex;
-		justify-content: space-between;
+		// justify-content: space-between;
 		padding: 20rpx;
 		border-top: 1px solid #eee;
 		color: #4d4d47;

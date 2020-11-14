@@ -224,14 +224,14 @@ var _index = __webpack_require__(/*! ../../api/Index/index.js */ 8);function _to
       List: [] //门店列表
     };
   },
-  // onLoad() {
-  // 	this.List=[];
-  // 	this.getdata();
-  // },
-  onShow: function onShow() {
+  onLoad: function onLoad() {
     this.List = [];
     this.getdata();
   },
+  // onShow() {
+  // 	this.List=[];
+  // 	this.getdata();
+  // },
   /* 下拉刷新 */
   onPullDownRefresh: function onPullDownRefresh() {
     this.Page = 1;
@@ -266,7 +266,7 @@ var _index = __webpack_require__(/*! ../../api/Index/index.js */ 8);function _to
     /* 房屋跳转 */
     store_info: function store_info(item) {
       uni.navigateTo({
-        url: 'store_info/store_info?id=' + item.id });
+        url: 'store_info/store_info?id=' + item.store_id });
 
     },
     /* 调用接口卡包 */

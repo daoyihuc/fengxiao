@@ -29,3 +29,7 @@ export function StoreList(data){
 export function StoreShare(data){
 	return request('StoreShare',data)
 }
+/* 县级代理接口 */
+export function CountyGgent(data){
+	return request('CountyGgent',data)
+}

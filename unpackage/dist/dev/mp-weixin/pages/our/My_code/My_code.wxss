@@ -37,6 +37,8 @@
   width: 150rpx;
   height: 150rpx;
   margin-top: -50rpx;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 .content .auto .image_code {
   width: 400rpx;

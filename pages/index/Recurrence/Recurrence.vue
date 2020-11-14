@@ -24,6 +24,7 @@
 		},
 		onReachBottom: function() {
 			this.Page++;
+			this.list=[];
 			this.getdata();
 		},
 		methods: {

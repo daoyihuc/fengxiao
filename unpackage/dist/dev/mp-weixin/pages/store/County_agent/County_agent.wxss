@@ -70,9 +70,6 @@
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
   padding: 20rpx;
   border-top: 1px solid #eee;
   color: #4d4d47;

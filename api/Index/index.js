@@ -23,7 +23,10 @@ export function Withdrawal(data){
 export function WithdrawalList(data){
 	return request('WithdrawalList',data)
 }
-
+/* 卡包消费详情接口 */
+export function ConsumptionDetails(data){
+	return request('ConsumptionDetails',data)
+}
 
 
 /* 个人信息接口 */
