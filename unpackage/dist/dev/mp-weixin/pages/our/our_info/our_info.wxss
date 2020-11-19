@@ -43,6 +43,7 @@
   height: 100rpx;
   -webkit-border-radius: 50%;
           border-radius: 50%;
+  margin-left: 350rpx;
 }
 .content .li .jian {
   width: 15rpx;
@@ -50,6 +51,7 @@
   padding-left: 20rpx;
 }
 .content .li .li_right {
+  width: 500rpx;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;

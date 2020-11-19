@@ -14,27 +14,51 @@
 			<view class="bar">
 				<view class="left">
 					<view style="display: flex;justify-content: center;position: relative;">
-						<cmd-progress type="dashboard" :percent="30" stroke-color="#d5d5d5" :stroke-width="7" :width="120" stroke-shape="square"
+						<cmd-progress type="dashboard" :percent="percent" stroke-color="#d5d5d5" :stroke-width="7" :width="120" stroke-shape="square"
 						 :showInfo="false"></cmd-progress>
 						<view style="position: absolute;text-align: center;top: 30%;">
 							<view style="font-size:12px;">今日新增会员数</view>
-							<view style="font-size:20px;padding-top: 10rpx;">100人</view>
+							<view style="font-size:20px;padding-top: 10rpx;">{{data.TodayNewUser}}人</view>
 						</view>
 					</view>
 					<view class="">
 						剩余未消费金额
 					</view>
 					<view class="">
-						100人
+						{{data.TotalNextMoney}}
 					</view>
 				</view>
 				<view class="right">
-					<view class="right_li" v-for="(item,index) in 4">
+					<view class="right_li">
 						<view class="">
 							今日消费金额
 						</view>
 						<view class="" style="font-size: 14px;">
-							100.00
+							{{data.TodayBUyMoney}}
+						</view>
+					</view>
+					<view class="right_li">
+						<view class="">
+							今日充值金额
+						</view>
+						<view class="" style="font-size: 14px;">
+							{{data.TodayRechargeMoney}}
+						</view>
+					</view>
+					<view class="right_li">
+						<view class="">
+							今日消费订单
+						</view>
+						<view class="" style="font-size: 14px;">
+							{{data.TodayBuyOrderNum}}单
+						</view>
+					</view>
+					<view class="right_li">
+						<view class="">
+							今日充值订单
+						</view>
+						<view class="" style="font-size: 14px;">
+							{{data.TodayRechargeNum}}单
 						</view>
 					</view>
 				</view>
@@ -73,6 +97,8 @@
 
 <script>
 	import cmdProgress from "@/components/cmd-progress/cmd-progress.vue"
+	/* 接口 */
+	import {MyStore} from '../../../api/our/our.js'
 	export default {
 		data() {
 			return {
@@ -92,7 +118,16 @@
 						url: '../poster/poster'
 					}
 				],
+				data:{},//所有数据
+				percent:null,//百分比
 			}
+		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
+		onLoad() {
+			this.getdata();
 		},
 		methods: {
 			/* 页面跳转到门面中心 */
@@ -123,11 +158,51 @@
 			saoyisao(){
 				// 允许从相机和相册扫码
 				uni.scanCode({
-				    success: function (res) {
+				    success: (res)=>{
+						uni.showToast({
+							title:res.result,
+							
+						})
 				        console.log('条码类型：' + res.scanType);
 				        console.log('条码内容：' + res.result);
 				    }
 				});
+			},
+			/* 获取到数据 */
+			getdata(){
+				MyStore({
+					token:uni.getStorageSync('token')
+				}).then(res=>{
+					if(res.code==1){
+						this.data=res.data;
+						this.percent=res.data.TodayNewUser/100;
+						uni.setStorageSync('store_id',res.data.store_id);
+					} else if(res.code==0){
+						uni.showToast({
+							title:res.msg,
+							icon:'none',
+							success: () => {
+								setTimeout(()=>{
+									uni.navigateBack({
+										delta:1
+									})
+								},1000)
+							}
+						})
+						
+					}
+					// else if(res.code==5){
+					// 	uni.navigateTo({
+					// 		url:'../../store/Store_entry/Store_entry'
+					// 	})
+					// }
+					else{
+						uni.showToast({
+							title:res.msg,
+							icon:'none'
+						})
+					}
+				})
 			},
 
 		},

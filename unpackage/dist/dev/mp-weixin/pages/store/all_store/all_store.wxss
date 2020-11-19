@@ -84,6 +84,8 @@
 .title_top image {
   width: 300rpx;
   height: 230rpx;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
 }
 .title_top .right {
   padding-left: 10rpx;

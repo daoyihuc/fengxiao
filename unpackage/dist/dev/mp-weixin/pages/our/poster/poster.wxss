@@ -24,10 +24,40 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.content image {
-  margin: 50rpx;
+.content .bg {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.content .img {
   height: 1000rpx;
   -webkit-border-radius: 20rpx;
           border-radius: 20rpx;
+}
+.content .imgs {
+  width: 130rpx;
+  height: 130rpx;
+  -webkit-border-radius: 20rpx;
+          border-radius: 20rpx;
+}
+.content .our {
+  margin-top: -200rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin-left: 100rpx;
+}
+.content .our .infor {
+  font-size: 13px;
+  font-weight: 600;
+}
+.content .our .infor view {
+  padding: 5rpx 10rpx;
 }
 

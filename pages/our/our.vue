@@ -5,8 +5,11 @@
 			<view class="user_info">
 				<view class="left">
 					<image :src="data.avatar" mode=""></image>
-				    <text v-if="name!='' ">{{name}}</text>
-					 <text v-else @tap='log'>请登录</text>
+					<!-- <button v-if="token=='0'" plain type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">请登录</button> -->
+					<text style="padding-left: 20rpx;" v-if='name!=""'>{{name}}</text>
+					<!-- <text @tap='log'> -->
+
+					<!-- </text> -->
 				</view>
 				<view class="right" @tap='edit'>
 					编辑资料
@@ -18,22 +21,31 @@
 			<view class="left">
 				<image src="../../static/img/our/jifen.png" mode=""></image>
 				<text>我的积分</text>
-				<text>{{score}}</text>
+				<text>{{data.MyPoints}}</text>
 			</view>
 			<view class="row">
-				
+
 			</view>
 			<view class="left">
 				<image src="../../static/img/our/jifen2.png" mode=""></image>
-				<text>我的积分</text>
-				<text>{{fronzen_score}}</text>
+				<text>冻结积分</text>
+				<text>{{data.FrozenPoints}}</text>
 			</view>
 		</view>
 		<view class="tab_list">
 			<view class="li" v-for="(item,index) in our_list_one" :key='index' @tap='select_url(item)'>
 				<view class="left">
 					<image :src="item.image" mode=""></image>
-				     <text>{{item.title}}</text>
+					<text>{{item.title}}</text>
+				</view>
+				<view class="right">
+					<image src="../../static/img/our/jiantou.png" mode=""></image>
+				</view>
+			</view>
+			<view class="li" @tap='select_store'>
+				<view class="left">
+					<image src="../../static/img/our/dianpu1.png" mode=""></image>
+					<text>我的店铺</text>
 				</view>
 				<view class="right">
 					<image src="../../static/img/our/jiantou.png" mode=""></image>
@@ -42,7 +54,7 @@
 			<view class="li" @tap='select_server'>
 				<view class="left">
 					<image src="../../static/img/our/kefu.png" mode=""></image>
-				     <text>客服中心</text>
+					<text>客服中心</text>
 				</view>
 				<view class="right">
 					<image src="../../static/img/our/jiantou.png" mode=""></image>
@@ -53,7 +65,7 @@
 			<view class="li" v-for="(item,index) in our_list_twe" @tap='select_url(item)'>
 				<view class="left">
 					<image :src="item.image" mode=""></image>
-				     <text>{{item.title}}</text>
+					<text>{{item.title}}</text>
 				</view>
 				<view class="right">
 					<image src="../../static/img/our/jiantou.png" mode=""></image>
@@ -64,41 +76,57 @@
 </template>
 
 <script>
-	import {getinfot} from '../../api/Index/index.js'
+	import {
+		getinfot,
+		Logn
+	} from '../../api/Index/index.js'
 	export default {
 		data() {
 			return {
-				name:'',//用户名
-				our_list_one:[
-					{
-						title:'我的二维码',
-						image:'../../static/img/our/erweimaw.png',
-						url:'My_code/My_code'
+				name: '', //用户名
+				our_list_one: [{
+						title: '我的二维码',
+						image: '../../static/img/our/erweimaw.png',
+						url: 'My_code/My_code'
+					}
+					// ,
+					// {
+					// 	title: '我的店铺',
+					// 	image: '../../static/img/our/dianpu1.png',
+					// 	url: 'My_store/My_store'
+					// }
+				],
+				our_list_twe: [{
+						title: '关于我们',
+						image: '../../static/img/our/guanyu.png',
+						url: 'about/about'
 					},
 					{
-						title:'我的店铺',
-						image:'../../static/img/our/dianpu1.png',
-						url:'My_store/My_store'
+						title: '意见反馈',
+						image: '../../static/img/our/yijian.png',
+						url: 'opinion/opinion'
 					}
 				],
-				our_list_twe:[
-					{
-						title:'关于我们',
-						image:'../../static/img/our/guanyu.png',
-						url:'about/about'
-					},
-					{
-						title:'意见反馈',
-						image:'../../static/img/our/yijian.png',
-						url:'opinion/opinion'
-					}
-				],
-				data:{},//所以信息
-				score:'',//积分
-				fronzen_score:'',//冻结积分
+				data: {}, //所以信息
+				score: '', //积分
+				fronzen_score: '', //冻结积分
+				token: null, //判断token是否过期
+				code:'',//登录的参数
+				Status:null  ,//店铺状态
 			}
 		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
 		onLoad() {
+			this.token = uni.getStorageSync('token');
+			uni.login({
+			  provider: 'weixin',
+			  success: (loginRes)=>{
+			this.code=loginRes.code;
+			  }
+			});
 			this.getdata();
 		},
 		onShow() {
@@ -106,61 +134,152 @@
 		},
 		methods: {
 			/* 点击跳转 */
-			select_url(item){
+			select_url(item) {
 				uni.navigateTo({
-					url:item.url
+					url: item.url
 				})
 			},
+			/* 店铺跳转 */
+			select_store(){
+				if(this.data.Status==0){
+					uni.showToast({
+						title:'你尚未提交申请！',
+						icon:'none',
+						success: () => {
+							uni.navigateTo({
+								url:'store_center/store_center'
+							})
+						}
+					})
+				}else if(this.data.Status==1){
+					uni.showToast({
+						title:'正在审核中！',
+						icon:'none'
+					})
+				}else if(this.data.Status==2){
+					uni.showToast({
+						title:'申请拒绝！',
+						icon:'none'
+					})
+				}else if(this.data.Status==3){
+					uni.showToast({
+						title:'门店已被禁用！',
+						icon:'none'
+					})
+				}else if(this.data.Status==4){
+					uni.navigateTo({
+						url:'My_store/My_store'
+					})
+				}
+				
+			},
 			/* 拨打客服电话 */
-			select_server(){
+			select_server() {
 				uni.showModal({
-				    title: '客服电话',
-				    content: '2356-5258-6955',
-				    success: function (res) {
-				        if (res.confirm) {
-				            console.log('用户点击确定');
-				        } else if (res.cancel) {
-				            console.log('用户点击取消');
-				        }
-				    }
+					title: '客服电话',
+					content: this.data.ServicePhone,
+					success: (res)=>{
+						if (res.confirm) {
+							uni.makePhoneCall({
+							    phoneNumber: this.data.ServicePhone//仅为示例
+							});
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
 				});
 			},
 			/* 编辑个人信息 */
-			edit(){
+			edit() {
 				uni.navigateTo({
-					url:'our_info/our_info'
+					url: 'our_info/our_info'
 				})
 			},
 			/* 跳转登录 */
-			log(){
+			log() {
 				uni.navigateTo({
-					url:'logn/logn'
+					url: 'logn/logn'
 				})
 			},
+			/* 登录 */
+			getUserInfo() {
+				uni.showModal({
+					title: '提示',
+					content: '请点击确定并授权',
+					success: (res) => {
+						if (res.confirm) {
+							var that = this;
+							let _this = this;
+							
+							uni.getUserInfo({
+								provider: 'weixin',
+								success: (infoRes) => {
+									var data = {
+										code: this.code,
+										gender: infoRes.userInfo.gender,
+										nickname: infoRes.userInfo.nickName,
+										avatar: infoRes.userInfo.avatarUrl,
+										inviteuid: uni.getStorageSync('id')
+									};
+									/* 调用登录*/
+									Logn(data).then(res => {
+										if (res.code == 1) {
+											uni.showToast({
+												title: res.msg,
+												icon: 'none',
+												success: () => {
+													uni.setStorageSync('token', res.data.Token);
+													uni.setStorageSync('id', res.data.UserInfo.id);
+													this.getdata();
+													this.token = uni.getStorageSync('token');
+												}
+											})
+										}
+									});
+
+								},
+
+								fail(res) {}
+
+							});
+
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+
+				})
+			},
+		
+		
 			/* 获取个人信息 */
-			getdata(){
-				this.score=uni.getStorageSync('userInfo').score;
-				this.fronzen_score=uni.getStorageSync('userInfo').fronzen_score;
-				console.log(this.fronzen_score);
-				getinfot({token:uni.getStorageSync('token')}).then((res)=>{
-					if(res.code==1){
-						this.data=res.data;
-						this.name=res.data.id;
-					}else{
+			getdata() {
+				getinfot({
+					token: uni.getStorageSync('token')
+				}).then((res) => {
+					if (res.code == 1) {
+						this.data = res.data;
+						this.name = res.data.nickname;
+						uni.setStorageSync('phone',res.data.ServicePhone)
+					} else {
 						uni.showToast({
-							title:res.msg,
-							icon:'none'
+							title: res.msg,
+							icon: 'none',
+							success: () => {
+								this.name='';
+								this.log();
+							}
 						})
 					}
 				})
 			}
-			
+
 		}
 	}
 </script>
 
 <style lang="scss">
-	.content{
+	.content {
 		.top_bg {
 			width: 100%;
 			height: 400rpx;
@@ -171,27 +290,41 @@
 			color: #fff;
 			font-size: 15px;
 			padding-top: 60rpx;
+
 			// border-radius: 0 0 20px 20px;
-			.top{
+			.top {
 				text-align: center;
 			}
-			.user_info{
+
+			.user_info {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
 				padding: 100rpx 20rpx 20rpx 20rpx;
-				.left{
+
+				.left {
 					display: flex;
 					align-items: center;
 					font-size: 18px;
-					image{
+
+					image {
 						// padding: 0 10rpx;
 						width: 100rpx;
 						height: 100rpx;
 						border-radius: 50%;
 					}
+
+					button {
+						background: none;
+						font-size: 15px;
+						color: #FFFFFF;
+						border: none;
+					}
+
+					
 				}
-				.right{
+
+				.right {
 					width: 150rpx;
 					height: 50rpx;
 					text-align: center;
@@ -201,8 +334,9 @@
 				}
 			}
 		}
+
 		/* 黑色背景 */
-		.bg_black{
+		.bg_black {
 			// background-color: #000;
 			color: #e5e5e5;
 			display: flex;
@@ -210,51 +344,60 @@
 			align-items: center;
 			font-size: 14px;
 			padding: 40rpx;
-			border-radius:30rpx 30rpx 50rpx 50rpx;
+			border-radius: 30rpx 30rpx 50rpx 50rpx;
 			margin-top: -100rpx;
 			margin-left: 30rpx;
 			margin-right: 30rpx;
-			image{
+
+			image {
 				width: 50rpx;
 				height: 50rpx;
 			}
-			.left{
+
+			.left {
 				display: flex;
 				align-items: center;
 			}
-			.row{
+
+			.row {
 				height: 30rpx;
 				width: 1rpx;
 				background-color: #eee;
 			}
 		}
-		.tab_list{
+
+		.tab_list {
 			margin-top: 30rpx;
-			.li{
+
+			.li {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				padding:0 30rpx;
+				padding: 0 30rpx;
 
 				font-size: 16px;
 				color: #535353;
-				.left{
+
+				.left {
 					display: flex;
 					align-items: center;
-					image{
-						width:45rpx;
+
+					image {
+						width: 45rpx;
 						height: 45rpx;
 						padding: 30rpx;
 					}
 				}
-				.right{
-					image{
+
+				.right {
+					image {
 						width: 15rpx;
 						height: 20rpx;
 					}
 				}
 			}
-			.row{
+
+			.row {
 				padding: 0 -30rpx;
 				background-color: #eee;
 				height: 5px;
@@ -262,5 +405,4 @@
 			}
 		}
 	}
-
 </style>

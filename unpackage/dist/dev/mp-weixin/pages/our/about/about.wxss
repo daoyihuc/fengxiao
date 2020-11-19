@@ -27,5 +27,9 @@
 .content {
   font-size: 15px;
   padding: 30rpx;
+  margin: auto;
+}
+.content image {
+  width: 98%;
 }
 

@@ -32,11 +32,10 @@
   left: 0;
   -webkit-transition: all 0.6s ease-in-out;
   transition: all 0.6s ease-in-out;
-  background-color: #333;
 }
 .logo image.data-v-08a8537a {
-  height: 160rpx;
-  width: 160rpx;
+  height: 250rpx;
+  width: 250rpx;
   display: block;
   -webkit-border-radius: 50%;
           border-radius: 50%;
@@ -130,18 +129,36 @@
   margin: 0 auto;
 }
 .wxLogin button.data-v-08a8537a {
-  width: 100rpx !important;
-  height: 100rpx;
+  width: 400rpx !important;
   position: absolute;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  -webkit-border-radius: 50rpx;
+          border-radius: 50rpx;
   text-align: center;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  opacity: 0;
-  z-index: 10;
-  padding: 0 !important;
+  border: none;
+  font-size: 14px;
+  padding: 5rpx;
+  color: #fff;
+  background: #ee521d;
+  font-weight: 600;
+}
+.cancel.data-v-08a8537a {
+  width: 400rpx !important;
+  position: absolute;
+  -webkit-border-radius: 50rpx;
+          border-radius: 50rpx;
+  text-align: center;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border: 1px solid #E5E5E5;
+  font-size: 14px;
+  padding: 18rpx 0 !important;
+  color: #000000 !important;
+  font-weight: 600;
 }
 

@@ -64,6 +64,8 @@
 .content .search_list .search_li image {
   width: 80rpx;
   height: 80rpx;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 .content .search_list .search_li .phone {
   font-size: 14px;

@@ -33,3 +33,16 @@ export function StoreShare(data){
 export function CountyGgent(data){
 	return request('CountyGgent',data)
 }
+/* 县级代理详情接口 */
+export function CountyGgentDetail(data){
+	return request('CountyGgentDetail',data)
+}
+
+/* 推广活动接口 */
+export function PromotionActivity(data){
+	return request('PromotionActivity',data)
+}
+/* 门店县级代理收益记录接口 */
+export function CountyGgentProfit(data){
+	return request('CountyGgentProfit',data)
+}

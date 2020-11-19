@@ -1,10 +1,10 @@
 <template>
 	<view class="content">
-		<view class="li">
-			<view class="li_left">
+		<view class="li" >
+			<view class="li_left" >
 				头像
 			</view>
-			<view class="li_right">
+			<view class="li_right" >
 				<view class="">
 					<image class="img" :src="image" mode="" @tap='select_img'></image>
 				</view>
@@ -26,7 +26,18 @@
 				性别
 			</view>
 			<view class="li_right">
-				<input type="text" :value="gender"  @input='gender_input'/>
+				<!-- <input type="text" :value="gender"  @input='gender_input'/> -->
+				<radio-group name="" @change="radio_change">
+					<label>
+						<radio :value="0" style="transform:scale(0.7)"/><text>保密</text>
+					</label>
+					<label>
+						<radio :value="1" style="transform:scale(0.7)"/><text>男</text>
+					</label>
+					<label>
+						<radio :value="2" style="transform:scale(0.7)"/><text>女</text>
+					</label>
+				</radio-group>
 			</view>
 		</view>
 		<view class="li">
@@ -56,10 +67,18 @@
 				data:{},//所以信息
 			}
 		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
 		onLoad() {
 			this.getdata();
 		},
 		methods: {
+			/* 选择性别 */
+			radio_change(e){
+				this.gender=e.detail.value;
+			},
 			/* 跟换头像 */
 			select_img(){
 
@@ -107,6 +126,11 @@
 									})
 								}
 							})
+						}else{
+							uni.showToast({
+								title:res.msg,
+								icon:'none'
+							})
 						}
 					})
 				},
@@ -152,6 +176,7 @@
 				width: 100rpx;
 				height: 100rpx;
 				border-radius: 50%;
+				margin-left: 350rpx;
 			}
 			.jian{
 				width: 15rpx;
@@ -159,6 +184,7 @@
 				padding-left: 20rpx;
 			}
 			.li_right{
+				width: 500rpx;
 				display: flex;
 				align-items: center;
 				color: #a5a5a5;

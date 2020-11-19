@@ -4,10 +4,10 @@
 			<image class="img" src="../../../static/fenxiang.png" mode=""></image>
 		</view>
 		<view class="our">
-			<image class="imgs" :src="poster" mode="" show-menu-by-longpress></image>
+			<image class="imgs" :src="poster.erweima" mode="" show-menu-by-longpress></image>
 			<view class="infor">
-			  <view class="">
-			  	小仙女
+			 <view class="">
+			  	{{poster.store_name}}
 			  </view>
 			  <view class="">
 			  	邀请您加入
@@ -34,6 +34,10 @@
 				isShow: true,
 			}
 		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
 		onLoad(e) {
 			this.id=e.id;
 			StoreShare({
@@ -41,7 +45,7 @@
 				StoreId:this.id
 			}).then(res=>{
 				if(res.code==1){
-					this.poster=res.data.erweima;
+					this.poster=res.data;
 					this.isShow = false;
 				}else{
 					uni.showToast({

@@ -67,6 +67,12 @@
   -webkit-border-radius: 50%;
           border-radius: 50%;
 }
+.content .top_bg .user_info .left button {
+  background: none;
+  font-size: 15px;
+  color: #FFFFFF;
+  border: none;
+}
 .content .top_bg .user_info .right {
   width: 150rpx;
   height: 50rpx;

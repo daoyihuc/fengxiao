@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "推广记录",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "loading": "/components/public/loading"
+  }
 }

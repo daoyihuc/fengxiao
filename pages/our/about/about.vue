@@ -1,6 +1,6 @@
 <template>
-	<view class="content">
-		{{data.content}}
+	<view class="content" v-html="data.content">
+		
 	</view>
 </template>
 
@@ -15,6 +15,10 @@
 		onLoad() {
 			this.getdata();
 		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
 		methods: {
 			/* 获取数据 */
 			getdata(){
@@ -39,6 +43,11 @@
 	.content{
 		font-size: 15px;
 		padding: 30rpx;
+		margin: auto;
+		image{
+			width:98%;
+			// height: 600rpx;
+		}
 	}
 
 </style>

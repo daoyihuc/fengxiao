@@ -10,8 +10,8 @@
 			<view class="text">
 				为您搜索到
 			</view>
-			<view class="search_li" @tap='tab_searchm(1)' v-for="(item,index) in color_list">
-				<image :src="item.image" mode=""></image>
+			<view class="search_li" @tap='tab_searchm(item)' v-for="(item,index) in color_list">
+				<image :src="item.avatar" mode=""></image>
 				<view class="phone">
 					<text style="color: #eeab0e;">{{item.color_text}}</text>
 					<text>{{item.no_color_text}}</text>
@@ -22,51 +22,75 @@
 </template>
 
 <script>
+	import {StoreSearch ,StoreTimeSearch} from '../../../api/our/our.js'
 	export default {
 		data() {
 			return {
 				search_text:'',//搜索的类容
 				search_list:[
-					{
-						image:'../../../static/img/index/erweima.png',
-						text:'14760716236'
-					},
-					{
-						image:'../../../static/img/index/erweima.png',
-						text:'14589568521'
-					},
-					{
-						image:'../../../static/img/index/erweima.png',
-						text:'15698563247'
-					}
+					// {
+					// 	image:'../../../static/img/index/erweima.png',
+					// 	text:'14760716236'
+					// },
+					// {
+					// 	image:'../../../static/img/index/erweima.png',
+					// 	text:'14589568521'
+					// },
+					// {
+					// 	image:'../../../static/img/index/erweima.png',
+					// 	text:'15698563247'
+					// }
 				],
 				color_list:[],//截取有颜色的数组
 				color_text:'',//有颜色的文字
 				no_color_text:'',//没有颜色的文字
+				Mobile:'',//会员电话
 			}
 		},
-		
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
 		methods: {
 			/* 跳转搜索页面 */
-			tab_searchm(){
+			tab_searchm(item){
+				console.log(item.Mobile)
 				uni.navigateTo({
-					url:'../search_info/search_info?id='+1
+					url:'../search_info/search_info?Mobile='+item.Mobile
 				})
 			},
 			/* 搜索的类容与下面的匹配 */
 			input_color(e){
+				this.search_text=e.detail.value;
 				var lenght=e.detail.value.length;
+				this.getdata();
 				var arr=[];
 				for(var i in this.search_list){
 					var json={};
-					json.image=this.search_list[i].image;
-					json.color_text=this.search_list[i].text.slice(0,lenght);
-					json.no_color_text=this.search_list[i].text.slice(lenght,12);
+					json.avatar=this.search_list[i].avatar;
+					json.Mobile=this.search_list[i].mobile;
+					json.color_text=this.search_list[i].mobile.slice(0,lenght);
+					json.no_color_text=this.search_list[i].mobile.slice(lenght,12);
 					arr.push(json);
 				}
 				this.color_list=arr;
-				console.log(this.color_list);
 			},
+			/* 搜索*/
+			getdata(){
+				StoreTimeSearch({
+					token:uni.getStorageSync('token'),
+					Mobile:this.search_text
+				}).then(res=>{
+					if(res.code==1){
+						this.search_list=res.data;
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:'none'
+						})
+					}
+				})
+			}
 		}
 	}
 </script>
@@ -103,6 +127,7 @@
 				image{
 					width: 80rpx;
 					height: 80rpx;
+					border-radius: 50%;
 				}
 				.phone{
 					font-size: 14px;

@@ -64,6 +64,10 @@
 					],
 			}
 		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
 		methods: {
 			/* 点击条件样式选择 */
 			select_active(index){

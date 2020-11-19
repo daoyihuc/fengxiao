@@ -9,7 +9,7 @@
 					</view>
 					<view class="img_money">
 						<image src="../../static/img/promotion/jifen.png" mode=""></image>
-						<text>15580.00</text>
+						<text>{{data.promotion_balance}}</text>
 					</view>
 				</view>
 				<view class="right" @tap='Withdrawal'>
@@ -22,7 +22,7 @@
 			<view class="fot">
 				<view class="left">
 					<text>累计已获得</text>
-					<text>15000.00</text>
+					<text>{{data.promotion_total_balance}}</text>
 				</view>
 				<view class="right" @tap='Recurrence'>
 					提现记录
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+	import { PromotionCenter } from '../../api/Center/Center.js'
 	export default {
 		data() {
 			return {
@@ -60,25 +61,33 @@
 						text:'推广海报',
 						url:'Poster/Poster'
 					},
-					{
-						image:'../../static/img/promotion/guize.png',
-						text:'推广规则',
-						url:'Promotion_rules/Promotion_rules'
-					},
+					// {
+					// 	image:'../../static/img/promotion/guize.png',
+					// 	text:'推广规则',
+					// 	url:'Promotion_rules/Promotion_rules'
+					// },
 					{
 						image:'../../static/img/promotion/tuiguang.png',
 						text:'推广记录',
 						url:'record/record'
 					}
 				],
+				data:{},//所有数据
 
 			}
+		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
+		onLoad() {
+			this.getdata();
 		},
 		methods: {
 			/* 提现 */
 			Withdrawal(){
 				uni.navigateTo({
-					url:'../index/Withdrawal/Withdrawal'
+					url:'../index/Withdrawal/Withdrawal?type=2'
 				})
 			},
 			/* 提现记录 */
@@ -93,6 +102,29 @@
 					url:item.url
 				})
 			},
+			/* 获取数据 */
+			getdata(){
+				PromotionCenter({
+					token:uni.getStorageSync('token')
+				}).then(res=>{
+					if(res.code==1){
+						this.data=res.data;
+						
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:"none",
+							success: () => {
+								/* 登录过期token=0 */
+								uni.setStorageSync('token','0');
+								uni.switchTab({
+									url:'../our/our'
+								})
+							}
+						})
+					}
+				})
+			}
 
 		}
 	}
@@ -178,7 +210,8 @@
 			.tab_card_list {
 				display: flex;
 				flex-wrap: wrap;
-				justify-content: space-around;
+				justify-content: flex-start;
+				
 				padding: 30rpx;
 
 				.tab_li {
@@ -189,7 +222,8 @@
 					border-radius: 20rpx;
 					font-size: 14px;
 					text-align: center;
-					margin-top: 20rpx;
+					margin: 20rpx 6rpx;
+					// margin-left: 15rpx;
 
 					image {
 						width: 80rpx;

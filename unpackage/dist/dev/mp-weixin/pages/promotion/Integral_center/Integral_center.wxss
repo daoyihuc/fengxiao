@@ -24,15 +24,48 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.content .card {
+.content .withdrawalrecord {
+  margin-top: 10rpx;
+}
+.content .record_list {
+  padding: 30rpx 4%;
+  background-color: #fff;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  border-bottom: 1rpx solid #eee;
+}
+.content .record_list .title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  line-height: 60rpx;
+  height: 60rpx;
+}
+.content .record_list .time {
+  font-size: 24rpx;
+  color: #7C7C7C;
+}
+.content .record_list .right {
+  font-size: 36rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #FF4643;
+}
+.content .nodata {
+  color: #ccc;
+  text-align: center;
+  font-size: 24rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+.content .card {
   background: -webkit-linear-gradient(18deg, #ff4810, #FD7239);
   background: linear-gradient(72deg, #ff4810, #FD7239);
   color: #FFFFFF;
@@ -46,6 +79,14 @@
 }
 .content .card .list {
   text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
 }
 .content .card .list view {
   padding: 5rpx 0;

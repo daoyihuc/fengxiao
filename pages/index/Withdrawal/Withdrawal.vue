@@ -2,12 +2,12 @@
 	<view class="content">
 		<view class="pay">
 			<view class="pay_left">
-				<image src="../../../static/img/index/weixinqianbao.png" mode=""></image>
-				<text>提现到微信</text>
+				<!-- <image src="../../../static/img/index/weixinqianbao.png" mode=""></image> -->
+				<text>提现到支付宝</text>
 			</view>
 			<view class="pay_right">
-				<input type="text" :value="telephone" :disabled="disabled?false:true" />
-				<text @tap="change">更改</text>
+				<input type="text"v-model="telephone" placeholder="请输入支付账号" />
+				<!-- <text @tap="change">更改</text> -->
 			</view>
 		</view>
 		<view class="select">
@@ -15,7 +15,7 @@
 				<text>选择提现金额</text>
 			</view>
 			<view class="" style="font-size: 14px;color: #999;">
-				<text>提现至微信钱包</text>
+				<text>提现到支付宝</text>
 			</view>
 		</view>
 		<!-- 选择金额卡片 -->
@@ -41,10 +41,11 @@
 	export default {
 		data() {
 			return {
-				telephone: '1476071626',
+				telephone: '',
 				disabled: false,
 				current:0,
 				money:3,//提现的金额
+				type:null,//提现类型
 				list:[
 					{
 						id:0,
@@ -81,6 +82,13 @@
 				
 			}
 		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
+		onLoad(e) {
+			this.type=e.type;
+		},
 		methods: {
 			/* 更改 */
 			change() {
@@ -95,7 +103,9 @@
 			save(){
 				Withdrawal({
 					money:this.money,
-					token:uni.getStorageSync('token')
+					token:uni.getStorageSync('token'),
+					type:this.type,
+					AlipayAccount:this.telephone
 				}).then(res=>{
 					if(res.code==1){
 						uni.showToast({

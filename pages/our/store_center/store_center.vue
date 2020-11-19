@@ -6,7 +6,7 @@
 					头像
 				</view>
 				<view class="right">
-					<image class="img" src="../../../static/img/index/erweima.png" mode=""></image>
+					<image class="img" :src="data.logo" mode=""></image>
 					<image class="jiantou" src="../../../static/img/our/jiantou.png" mode=""></image>
 				</view>
 			</view>
@@ -15,7 +15,7 @@
 					门店名称
 				</view>
 				<view class="right">
-					张张的店
+					{{data.store_name}}
 				</view>
 			</view>
 			<view class="li">
@@ -23,7 +23,7 @@
 					门店地址
 				</view>
 				<view class="right">
-					湖南省长沙市开福区万达广场
+					{{data.province}}{{data.city}}{{data.district}}{{data.address}}
 				</view>
 			</view>
 			<view class="li">
@@ -31,7 +31,7 @@
 					门店电话
 				</view>
 				<view class="right">
-					14760716326
+					{{data.mobile}}
 				</view>
 			</view>
 			<view class="lis">
@@ -39,10 +39,7 @@
 					门店电话
 				</view>
 				<view class="right">
-					门店描述门店描述
-					门店描述门店描述
-					门店描述门店描述
-					门店描述门店描述
+					{{data.desc}}
 				</view>
 			</view>
 
@@ -65,15 +62,24 @@
 				<view style="color: #FA5F3E;">门店中心</view>
 			</view>
 		</view>
+		<!-- 页面加载 -->
+		<loading v-if="isShow == true"></loading>
 	</view>
 </template>
 
 <script>
+	import loading from "../../../components/public/loading.vue";
+	import {StoreInfo} from '../../../api/our/our.js'
 	export default {
 		data() {
 			return {
+				data:{},//页面数据
+			    isShow: true,
 
 			}
+		},
+		onLoad() {
+			this.getdata();
 		},
 		methods: {
 			/* 跳转回去 */
@@ -91,6 +97,22 @@
 				        console.log('条码内容：' + res.result);
 				    }
 				});
+			},
+			/* 页面数据获取 */
+			getdata(){
+				StoreInfo({
+					token:uni.getStorageSync('token')
+				}).then(res=>{
+					if(res.code==1){
+						this.data=res.data;
+						this.isShow = false;
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:'none'
+						})
+					}
+				})
 			},
 
 		}

@@ -82,7 +82,7 @@ page {
 .content .list .li .top {
   font-size: 14px;
   color: #d6d6d6;
-  padding: 20rpx;
+  padding: 20rpx 30rpx;
   border-bottom: 1px solid #eee;
   display: -webkit-box;
   display: -webkit-flex;
@@ -102,7 +102,7 @@ page {
   -webkit-align-items: center;
           align-items: center;
   font-size: 16px;
-  padding: 20rpx;
+  padding: 20rpx 30rpx;
   color: #3a3a3a;
 }
 .content .list .li .fot .right {

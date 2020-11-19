@@ -12,10 +12,10 @@
 			</view>
 			<view :class="gray==1?'left active':'left'">
 				<image :class="gray==1?'active':''" src="../../../static/img/store/shenhe2.png" mode=""></image>
-				<view class="name" v-if="status!=2">
+				<view class="name" v-if="status==1">
 					等待审核
 				</view>
-				<view class="name" else>
+				<view class="name" v-if="status==2">
 					审核通过
 				</view>
 			</view>
@@ -55,10 +55,10 @@
 		<!-- 等待审核 -->
 		<view class="wait" v-if="gray==0">
 			<image src="../../../static/img/store/quesheng1.png" mode=""></image>
-	         <view class="text" v-if="status!=2">
+	         <view class="text" v-if="status==1">
 	         	信息审核需要1-3天噢，请耐心等待~
 	         </view>
-				 <view class="text" else>
+				 <view class="text" v-if="status==1">
 				 	审核通过
 				 </view>	
 		</view>
@@ -79,8 +79,18 @@
 				status:null,//审核的状态
 			}
 		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
 		onLoad() {
 			this.getStatus();
+		},
+		onBackPress() {
+			console.log(1)
+			uni.switchTab({
+				url:'../../our/our'
+			})
 		},
 		methods: {
 			/* 审核状态 */
@@ -101,6 +111,18 @@
 								icon:'none'
 							})
 						}
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:"none",
+							success: () => {
+								/* 登录过期token=0 */
+								uni.setStorageSync('token','0');
+								uni.switchTab({
+									url:'../../our/our'
+								})
+							}
+						})
 					}
 				})
 			},
@@ -118,11 +140,12 @@
 					District:this.address.split(',')[2]
 				};
 				StoreEntry(data).then(res=>{
-					if(res.code==0){
+					if(res.code==1){
 						uni.showToast({
 							title:res.msg,
 							icon:'none',
 							success: () => {
+								this.getStatus();
 								this.gray=0;
 							}
 						})

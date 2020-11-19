@@ -904,7 +904,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_NAME":"Store_distribution","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"Store_distribution","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2726,7 +2726,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 178:
+/***/ 179:
 /*!******************************************************************!*\
   !*** D:/ws/work/分销-2020-10-26/Store_distribution/api/our/our.js ***!
   \******************************************************************/
@@ -2734,7 +2734,7 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.MyCode = MyCode;exports.AboutUs = AboutUs;exports.FeedBack = FeedBack;var _request = _interopRequireDefault(__webpack_require__(/*! ../../utils/request.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.MyCode = MyCode;exports.AboutUs = AboutUs;exports.FeedBack = FeedBack;exports.StoreOrderList = StoreOrderList;exports.BusinessData = BusinessData;exports.MyStore = MyStore;exports.StoreInfo = StoreInfo;exports.StoreTimeSearch = StoreTimeSearch;exports.StoreSearch = StoreSearch;var _request = _interopRequireDefault(__webpack_require__(/*! ../../utils/request.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 /* 我的二维码接口 */
 function MyCode(data) {
@@ -2749,6 +2749,40 @@ function AboutUs(data) {
 /* 意见反馈接口 */
 function FeedBack(data) {
   return (0, _request.default)('FeedBack', data);
+}
+
+/* 
+   我的店铺接口
+   */
+
+
+/* 我的店铺-订单明细列表接口 */
+function StoreOrderList(data) {
+  return (0, _request.default)('StoreOrderList', data);
+}
+
+/* 我的店铺-经营数据接口 */
+function BusinessData(data) {
+  return (0, _request.default)('BusinessData', data);
+}
+
+/* 我的店铺接口 */
+function MyStore(data) {
+  return (0, _request.default)('MyStore', data);
+}
+
+/* 门店中心详情接口 */
+function StoreInfo(data) {
+  return (0, _request.default)('StoreInfo', data);
+}
+
+/* 我的店铺实时搜索接口 */
+function StoreTimeSearch(data) {
+  return (0, _request.default)('StoreTimeSearch', data);
+}
+/* 我的店铺搜索接口 */
+function StoreSearch(data) {
+  return (0, _request.default)('StoreSearch', data);
 }
 
 /***/ }),
@@ -8279,7 +8313,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_NAME":"Store_distribution","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"Store_distribution","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8300,14 +8334,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_NAME":"Store_distribution","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"Store_distribution","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_NAME":"Store_distribution","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"Store_distribution","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8393,7 +8427,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_NAME":"Store_distribution","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"Store_distribution","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8800,38 +8834,7 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 3:
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 30:
+/***/ 22:
 /*!**********************************************************************!*\
   !*** D:/ws/work/分销-2020-10-26/Store_distribution/api/store/store.js ***!
   \**********************************************************************/
@@ -8839,7 +8842,7 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.StoreEntry = StoreEntry;exports.StoreStatus = StoreStatus;exports.Store = Store;exports.StoreDetail = StoreDetail;exports.StoreList = StoreList;exports.StoreShare = StoreShare;exports.CountyGgent = CountyGgent;var _request = _interopRequireDefault(__webpack_require__(/*! ../../utils/request.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.StoreEntry = StoreEntry;exports.StoreStatus = StoreStatus;exports.Store = Store;exports.StoreDetail = StoreDetail;exports.StoreList = StoreList;exports.StoreShare = StoreShare;exports.CountyGgent = CountyGgent;exports.CountyGgentDetail = CountyGgentDetail;exports.PromotionActivity = PromotionActivity;exports.CountyGgentProfit = CountyGgentProfit;var _request = _interopRequireDefault(__webpack_require__(/*! ../../utils/request.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 /* 门店入驻接口 */
 function StoreEntry(data) {
@@ -8874,10 +8877,54 @@ function StoreShare(data) {
 function CountyGgent(data) {
   return (0, _request.default)('CountyGgent', data);
 }
+/* 县级代理详情接口 */
+function CountyGgentDetail(data) {
+  return (0, _request.default)('CountyGgentDetail', data);
+}
+
+/* 推广活动接口 */
+function PromotionActivity(data) {
+  return (0, _request.default)('PromotionActivity', data);
+}
+/* 门店县级代理收益记录接口 */
+function CountyGgentProfit(data) {
+  return (0, _request.default)('CountyGgentProfit', data);
+}
 
 /***/ }),
 
-/***/ 302:
+/***/ 3:
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 303:
 /*!*********************************************************************************!*\
   !*** D:/ws/work/分销-2020-10-26/Store_distribution/components/uni-popup/popup.js ***!
   \*********************************************************************************/
@@ -8885,7 +8932,7 @@ function CountyGgent(data) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 303));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 304));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // 定义 type 类型:弹出类型：top/bottom/center
 var config = {
   // 顶部弹出
@@ -8912,7 +8959,7 @@ var config = {
 
 /***/ }),
 
-/***/ 303:
+/***/ 304:
 /*!***********************************************************************************!*\
   !*** D:/ws/work/分销-2020-10-26/Store_distribution/components/uni-popup/message.js ***!
   \***********************************************************************************/
@@ -8943,7 +8990,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 311:
+/***/ 312:
 /*!*********************************************************************************!*\
   !*** D:/ws/work/分销-2020-10-26/Store_distribution/components/uni-icons/icons.js ***!
   \*********************************************************************************/
@@ -9046,6 +9093,38 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   'closefill': "\uE589",
   'sound': "\uE590",
   'scan': "\uE612" };exports.default = _default;
+
+/***/ }),
+
+/***/ 39:
+/*!************************************************************************!*\
+  !*** D:/ws/work/分销-2020-10-26/Store_distribution/api/Center/Center.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.PromotionLog = PromotionLog;exports.PromotionCenter = PromotionCenter;exports.PromoterPoster = PromoterPoster;exports.YuanbaoCenter = YuanbaoCenter;var _request = _interopRequireDefault(__webpack_require__(/*! ../../utils/request.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+/* 推广记录接口 */
+function PromotionLog(data) {
+  return (0, _request.default)('PromotionLog', data);
+}
+
+/* 推广记录接口 */
+function PromotionCenter(data) {
+  return (0, _request.default)('PromotionCenter', data);
+}
+
+/* 推广人海报接口 */
+function PromoterPoster(data) {
+  return (0, _request.default)('PromoterPoster', data);
+}
+
+/* 元宝中心接口 */
+function YuanbaoCenter(data) {
+  return (0, _request.default)('YuanbaoCenter', data);
+}
 
 /***/ }),
 

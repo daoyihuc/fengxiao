@@ -1,1 +1,1 @@
-<view class="content">{{''+data.content+''}}</view>
+<view class="content"><rich-text nodes="{{data.content}}"></rich-text></view>

@@ -26,7 +26,7 @@
 			</view>
 			<text>门店介绍</text>
 		</view>
-		<view class="info">
+		<view class="info" v-html="data.desc">
 			{{data.desc}}
 		</view>
 
@@ -46,8 +46,28 @@
 				data:{},//所有数据
 			}
 		},
-		onLoad(e) {
-			this.id=e.id;
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
+		onLoad(options) {
+			if (options.scene) {
+				let scene = decodeURIComponent(options.scene);
+				this.id=scene;
+				// setTimeout(()=>{
+				//     uni.showToast({
+				//     	title:scene
+				//     })
+				// },2000);
+				// }else{
+				//    uni.showToast({
+				//    	title:"0"
+				//    })
+				// }
+			}else{
+				this.id=options.id;
+			}
+			
 			this.getdata();
 		},
 		methods: {
@@ -75,7 +95,14 @@
 					}else{
 						uni.showToast({
 							title:res.msg,
-							icon:"none"
+							icon:"none",
+							success: () => {
+								/* 登录过期token=0 */
+								uni.setStorageSync('token','0');
+								uni.switchTab({
+									url:'../../our/our'
+								})
+							}
 						})
 					}
 				})

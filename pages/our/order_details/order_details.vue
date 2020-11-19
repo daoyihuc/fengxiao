@@ -4,7 +4,7 @@
 		<view class="search_bg">
 			<view class="search" @tap="search">
 				<image src="../../../static/img/our/store/search.png" mode=""></image>
-				<input type="text" :value="search_text" />
+				<input type="text" :value="search_text" @blur='select_value'/>
 			</view>
 			<view class="text" @tap='open'>
 				筛选<image src="../../../static/img/our/shaixuan.png" mode=""></image>
@@ -12,24 +12,30 @@
 		</view>
 		<!-- 订单列表 -->
 		<view class="list">
-			<view class="li">
+			<view class="li" v-for="(item,index) in list">
 				<view class="top">
 					<view class="">
-						2020-5-28
+						{{item.time}}
 					</view>
 					<view class="">
-						消费订单
+						{{item.type==1?'门店消费订单':'充值订单'}}
 					</view>
 				</view>
 				<view class="fot">
 					<view class="left">
-						<text>用户id：</text>小仙女
+						<text>用户id：</text>{{item.nickname}}
 					</view>
 					<view class="right">
-						+100
+						{{item.money}}
 					</view>
 				</view>
 			</view>
+		</view>
+		<view  v-if="list==0">
+			<image src="../../../static/img/store/quesheng1.png" mode=""></image>
+		     <view  style="text-align: center;font-size: 14px; color: #808080;" >
+		     	暂无数据
+		     </view> 	
 		</view>
 		<!-- 筛选弹框 -->
 		<uni-popup ref="popup" type="top" :maskClick='true'>
@@ -43,8 +49,8 @@
 					<image src="../../../static/img/our/store/dowm.png" mode=""></image>
 				</view>
 				<view class="time_list">
-					<view :class="time_current==index?'time_li active':'time_li' " v-for="(item,index) in 4"  @tap='time(index)'>
-						月
+					<view :class="time_current==item.value?'time_li active':'time_li' " v-for="(item,index) in dateline_list"  @tap='time(item)'>
+						{{item.title}}
 					</view>
 				</view>
 				<!-- 筛选条件 -->
@@ -53,12 +59,12 @@
 					<image src="../../../static/img/our/store/dowm.png" mode=""></image>
 				</view>
 				<view class="time_list">
-					<view :class="small_current==index?'time_li active':'time_li' "  v-for="(item,index) in 4" @tap='small(index)'>
-						充值明细
+					<view :class="small_current==item.value?'time_li active':'time_li' "  v-for="(item,index) in type_li" @tap='small(item)'>
+						{{item.title}}
 					</view>
 				</view>
 				<!-- 确定按钮 -->
-				<view class="bot">
+				<view class="bot" @tap='save'>
 					确定
 				</view>
 			</view>
@@ -68,6 +74,8 @@
 
 <script>
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	/* 接口 */
+	import {StoreOrderList} from '../../../api/our/our.js'
 	export default {
 		data() {
 			return {
@@ -75,9 +83,36 @@
 				height: null, //页面的高度
 				time_current:null,//时间的选择
 				small_current:null,//明细的选择
+				list:[],//列表参数
+				Page:1,//页面
+				dateline_list:[// 数据筛选
+					{
+						title:'月',
+						value:'month'
+					},
+					{
+						title:'季度',
+						value:'quarter'
+					},
+				],
+				type_li:[//明细类型筛选
+					{
+						title:'充值明细',
+						value:1
+					},
+					{
+						title:'消费明细',
+						value:2
+					}
+				],
 			}
 		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
 		onLoad() {
+			/* 获取高度 */
 			try {
 				const res = uni.getSystemInfoSync();
 				this.height = res.windowHeight;
@@ -85,19 +120,53 @@
 			} catch (e) {
 				// error
 			}
+			/* 接口 */
+			this.getdata();
+			
 		},
 		methods: {
 			/* 弹窗筛选 */
 			open() {
-				this.$refs.popup.open()
+				this.$refs.popup.open();
 			},
 			/* 时间的选择 */
-			time(index){
-				this.time_current=index;
+			time(item){
+				this.time_current=item.value;
 			},
 			/* 明细 */
-			small(index){
-				this.small_current=index;
+			small(item){
+				this.small_current=item.value;
+			},
+			/* 筛选的值 */
+			select_value(e){
+				this.search_text=e.detail.value;
+				this.list=[];
+				this.getdata();
+			},
+			/* 点击筛选 */
+			save(){
+				this.list=[];
+				this.getdata();
+				this.$refs.popup.close ();
+			},
+			/* 获取页面数据 */
+			getdata(){
+				StoreOrderList({
+					token:uni.getStorageSync('token'),
+					Page:this.Page,
+					Keywords:this.search_text,
+					dateline:this.time_current,
+					type:this.small_current
+				}).then(res=>{
+					if(res.code==1){
+						this.list=[...this.list,...res.data.List];
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:'none'
+						})
+					}
+				})
 			}
 		},
 		components: {
@@ -156,7 +225,7 @@
 				.top {
 					font-size: 14px;
 					color: #d6d6d6;
-					padding: 20rpx;
+					padding: 20rpx 30rpx;
 					border-bottom: 1px solid #eee;
 					display: flex;
 					justify-content: space-between;
@@ -167,7 +236,7 @@
 					justify-content: space-between;
 					align-items: center;
 					font-size: 16px;
-					padding: 20rpx;
+					padding: 20rpx 30rpx;
 					color: #3a3a3a;
 
 					.right {

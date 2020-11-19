@@ -38,6 +38,12 @@ page {
   color: #d6d6d6;
   padding: 20rpx;
   border-bottom: 1px solid #eee;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
 }
 .content .list .li .fot {
   display: -webkit-box;

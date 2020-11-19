@@ -24,6 +24,80 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.card {
+  width: 100%;
+  height: 480rpx;
+  background-size: 100% 100%;
+  background: -webkit-linear-gradient(18deg, #FF444B, #FD7239);
+  background: linear-gradient(72deg, #FF444B, #FD7239);
+}
+.top_img {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 50rpx 0;
+  font-size: 15px;
+  color: #FFFFFF;
+}
+.top_img text {
+  text-align: center;
+  margin-left: 35%;
+}
+.top_img image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.fot_img {
+  color: #FFFFFF;
+  font-size: 14px;
+  text-align: center;
+}
+.money {
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 30px;
+  font-weight: 600;
+  padding: 15rpx 0;
+}
+.add {
+  font-size: 14px;
+  color: #f0f0f0;
+  text-align: center;
+}
+.add text {
+  padding: 0 10rpx;
+}
+.bots {
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin: 20rpx auto;
+  font-size: 14px;
+  text-align: center;
+  background-color: #FFFFFF;
+  color: #FA4934;
+  -webkit-border-radius: 30rpx;
+          border-radius: 30rpx;
+}
+.rights {
+  color: #FFFFFF;
+  font-size: 14px;
+  text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 10rpx 20rpx;
+}
+.rights image {
+  width: 40rpx;
+  height: 40rpx;
+}
 .card_top {
   font-size: 16px;
   color: #333333;

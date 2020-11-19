@@ -6,7 +6,7 @@
 				{{data.MemberInfo.nickname}}
 			</view>
 			<view class="code">
-			   扫描下方二维码加我
+			   扫描下方小程序码加我
 			</view>
 			<image class="image_code" :src="data.erweima" mode=""></image>
 		</view>
@@ -25,6 +25,10 @@
 				isShow: true,
 			}
 		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
 		onLoad() {
 			this.getdata();
 		},

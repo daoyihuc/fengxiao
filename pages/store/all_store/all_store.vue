@@ -21,7 +21,12 @@
 			
 		</view>
 	</view>
-	
+	<view class="wait" v-if="StoreList==0">
+		<image src="../../static/img/store/quesheng1.png" mode=""></image>
+	     <view class="text" style="text-align: center;font-size: 14px; color: #808080;" >
+	     	暂无数据
+	     </view> 	
+	</view>
 	</view>
 </template>
 
@@ -37,6 +42,10 @@
 				data:{},//所有数据
 			}
 		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
 		onLoad() {
 			/* 调用获取页面信息方法 */
 			this.getdata();
@@ -83,6 +92,7 @@
 			image{
 				width: 300rpx;
 				height: 230rpx;
+				border-radius: 10rpx;
 			}
 			.right{
 				padding-left: 10rpx;

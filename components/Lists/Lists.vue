@@ -7,7 +7,7 @@
 					<view class="time">{{item.time}}</view>
 				</view>
 				<view class="right">
-					<view>-{{item.money}}</view>
+					<view>{{item.money}}</view>
 					<view class="time">{{item.statust==0?'待审核':item.statust==1?'审核成功':item.statust==2?'审核失败':''}}</view>
 				</view>
 			</view>

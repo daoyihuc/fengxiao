@@ -17,20 +17,20 @@
 				</view>
 				<view class="text_small">
 					<view class="small_left">
-						剩余：<text>{{data.ResidualIntegral}}</text>
+						充值余额：<text>{{data.ResidualIntegral}}</text>
 					</view>
 					<view class="small_left">
 						总消费：<text>{{data.ConsumptionPoints}}</text>
 					</view>
 				</view>
-				<view class="text_smalls">
+				<!-- <view class="text_smalls">
 					<view class="small_left">
 						已消费(三个月内)：
 					</view>
 					<view class="small_left">
 						<text>{{data.ThreeTotalMoney}}</text>
 					</view>
-				</view>
+				</view> -->
 				<view class="text_smalls">
 					<view class="small_left">
 						距离返现相差金额：
@@ -47,14 +47,14 @@
 						<text>{{data.InvalidAmount}}</text>
 					</view>
 				</view>
-				<view class="text_smalls">
+				<!-- <view class="text_smalls">
 					<view class="small_left">
 						失效时间(三个月内)：
 					</view>
 					<view class="small_left">
 						<text>{{data.invalid_endtime}}</text>
 					</view>
-				</view>
+				</view> -->
 				
 			</view>
 		</view>
@@ -97,6 +97,10 @@
 			this.list=[];
 			this.getdata();
 		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
 		methods: {
 			/* 获取页面数据 */
 			getdata(){

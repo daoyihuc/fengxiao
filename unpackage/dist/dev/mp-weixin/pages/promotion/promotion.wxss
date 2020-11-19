@@ -116,8 +116,9 @@
   display: flex;
   -webkit-flex-wrap: wrap;
           flex-wrap: wrap;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
   padding: 30rpx;
 }
 .content .tab_card .tab_card_list .tab_li {
@@ -130,7 +131,7 @@
           border-radius: 20rpx;
   font-size: 14px;
   text-align: center;
-  margin-top: 20rpx;
+  margin: 20rpx 6rpx;
 }
 .content .tab_card .tab_card_list .tab_li image {
   width: 80rpx;

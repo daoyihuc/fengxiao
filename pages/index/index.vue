@@ -8,7 +8,7 @@
 				<view class="top_left">
 					获取积分<text style="padding-left: 20rpx;">(10积分<text style="color: #FA5F3E;">兑</text>1元)</text>
 				</view>
-				<image src="../../static/img/index/erweima.png" mode=""></image>
+				<image src="../../static/img/index/erweima.png" mode="" @tap='erweima'></image>
 			</view>
 			<view class="center">
 				<view class="center_left">
@@ -56,14 +56,21 @@
 					</view>
 					<view class="card_li_right">
 						<view class="bot_top">
-							剩余：{{item.ResidualIntegral}}
+							余额：{{item.ResidualIntegral}}
 						</view>
 						<view class="bot_top active">
-							积分：{{item.ConsumptionPoints}}
+							消费：{{item.ConsumptionPoints}}
 						</view>
 					</view>
 				</view>
 			</view>
+		</view>
+		<!-- 无数据展示 -->
+		<view class="wait" v-if="List.length==0">
+			<image src="../../static/img/store/quesheng1.png" mode=""></image>
+		     <view class="text" style="text-align: center;font-size: 14px; color: #808080;" >
+		     	暂无数据
+		     </view> 	
 		</view>
 		<!-- 页面加载 -->
 		<loading v-if="isShow == true"></loading>
@@ -82,14 +89,18 @@
 				List:[],//门店列表
 			}
 		},
-		onLoad() {
-			this.List=[];
-			this.getdata();
-		},
-		// onShow() {
+		// onLoad() {
 		// 	this.List=[];
 		// 	this.getdata();
 		// },
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
+		onShow() {
+			this.List=[];
+			this.getdata();
+		},
 		/* 下拉刷新 */
 		onPullDownRefresh(){
 			this.Page=1;
@@ -103,6 +114,12 @@
 			this.getdata();
 		},
 		methods: {
+			/* 二维码跳转 */
+			erweima(){
+				uni.navigateTo({
+					url:'../our/My_code/My_code'
+				})
+			},
 			/* 提现跳转 */
 			recurrence() {
 				uni.navigateTo({
@@ -118,7 +135,7 @@
 			/* 提现跳转 */
 			Withdrawal() {
 				uni.navigateTo({
-					url: 'Withdrawal/Withdrawal'
+					url: 'Withdrawal/Withdrawal?type=0'
 				})
 			},
 			/* 房屋跳转 */
@@ -141,7 +158,14 @@
 					}else{
 						uni.showToast({
 							title:res.msg,
-							icon:'none'
+							icon:'none',
+							success: () => {
+								/* 登录过期token=0 */
+							uni.setStorageSync('token','0');
+							uni.switchTab({
+								url:'../our/our'
+							})
+							}
 						})
 					}
 				})
@@ -233,7 +257,7 @@
 				justify-content: space-between;
 				align-items: center;
 				border-top: 1px solid #eee;
-				padding: 30rpx;
+				padding: 20rpx;
 				width: 610rpx;
 				margin: 50rpx auto;
 

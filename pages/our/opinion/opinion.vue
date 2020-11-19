@@ -36,6 +36,10 @@
 				img_arr:[],
 			}
 		},
+		/* 分享 */
+		 onShareAppMessage(res){
+			 
+		 },
 		methods: {
 			/* 表单数据 */
 			onSubmit(e) {

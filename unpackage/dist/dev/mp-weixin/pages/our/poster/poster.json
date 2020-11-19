@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "海报",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "loading": "/components/public/loading"
+  }
 }

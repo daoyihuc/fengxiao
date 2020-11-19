@@ -1,1 +1,1 @@
-<view class="content"><image src="{{poster}}" mode show-menu-by-longpress="{{true}}"></image></view>
+<view class="content"><view class="bg"><image class="img" src="../../../static/fenxiang.png" mode></image></view><view class="our"><image class="imgs" src="{{poster.erweima}}" mode show-menu-by-longpress="{{true}}"></image><view class="infor"><view>{{''+poster.store_name+''}}</view><view>邀请您加入</view></view></view><block wx:if="{{isShow==true}}"><loading vue-id="67e117c3-1" bind:__l="__l"></loading></block></view>
