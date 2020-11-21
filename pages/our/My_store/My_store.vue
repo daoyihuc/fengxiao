@@ -84,8 +84,11 @@
 				<view style="color: #FA5F3E;">我的店铺</view>
 			</view>
 			<view class="center"  @tap='saoyisao'>
-				<image src="../../../static/img/our/store/saoyisao.png" mode=""></image>
-				<view>扫一扫</view>
+				<view class="er">
+					<image src="../../../static/er.png" mode=""></image>
+				</view>
+				<!-- <image src="../../../static/img/our/store/saoyisao.png" mode=""></image> -->
+				<view>门店二维码</view>
 			</view>
 			<view class="right" @tap='store_center'>
 				<image src="../../../static/img/our/store/zhongx.png" mode=""></image>
@@ -114,8 +117,8 @@
 					},
 					{
 						image: '../../../static/img/our/store/haibao.png',
-						text: '海报生成',
-						url: '../poster/poster'
+						text: '添加订单',
+						url: '../order/order'
 					}
 				],
 				data:{},//所有数据
@@ -157,16 +160,19 @@
 			/* 扫一扫 */
 			saoyisao(){
 				// 允许从相机和相册扫码
-				uni.scanCode({
-				    success: (res)=>{
-						uni.showToast({
-							title:res.result,
+				// uni.scanCode({
+				//     success: (res)=>{
+				// 		uni.showToast({
+				// 			title:res.result,
 							
-						})
-				        console.log('条码类型：' + res.scanType);
-				        console.log('条码内容：' + res.result);
-				    }
-				});
+				// 		})
+				//         console.log('条码类型：' + res.scanType);
+				//         console.log('条码内容：' + res.result);
+				//     }
+				// });
+				uni.navigateTo({
+					url:'../poster/poster'
+				})
 			},
 			/* 获取到数据 */
 			getdata(){
@@ -223,8 +229,8 @@
 			.top_img {
 				width: 100%;
 				display: flex;
-				padding: 50rpx 0;
-				font-size: 18px;
+				padding: 70rpx 0;
+				font-size: 15px;
 				color: #FFFFFF;
 
 				text {
@@ -345,10 +351,23 @@
 
 			.center {
 				margin-top: -30px;
+				.er{
+					width: 70rpx;
+					height: 70rpx;
+					background-color: #FA5F3E;
+					border-radius: 50%;
+					padding: 10rpx;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					box-shadow: 0px 0px 5px 5rpx #e2e2e2;
+					margin-bottom: 25rpx;
+					margin-left: 10rpx;
+				}
 
 				image {
-					width: 100rpx;
-					height: 100rpx;
+					width: 50rpx;
+					height: 50rpx;
 				}
 				view{
 					padding-top: 5px;

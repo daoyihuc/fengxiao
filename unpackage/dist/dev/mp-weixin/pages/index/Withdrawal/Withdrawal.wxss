@@ -60,9 +60,6 @@
           align-items: center;
   font-size: 15px;
 }
-.content .pay .pay_right input {
-  width: 180rpx;
-}
 .content .pay .pay_right text {
   color: #FA5F3E;
 }

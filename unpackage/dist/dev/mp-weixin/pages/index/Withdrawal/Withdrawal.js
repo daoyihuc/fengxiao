@@ -169,7 +169,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _index = __webpack_require__(/*! ../../../api/Index/index.js */ 8); //
+//
+//
+//
 //
 //
 //
@@ -209,11 +215,8 @@ var _index = __webpack_require__(/*! ../../../api/Index/index.js */ 8); //
 //
 var _default = { data: function data() {return { telephone: '', disabled: false, current: 0, money: 3, //提现的金额
       type: null, //提现类型
-      list: [{ id: 0, title: 5, money: 3.00 }, { id: 1, title: 50, money: 48.00 }, { id: 2, title: 100, money: 98.00 }, { id: 3, title: 200, money: 198.00 }, { id: 4, title: 500, money: 498.00 }, { id: 5, title: 1000, money: 998.00 }]
-      //提现金额
-    };
-
-  },
+      list: [{ id: 0, title: 5, money: 3.00 }, { id: 1, title: 50, money: 48.00 }, { id: 2, title: 100, money: 98.00 }, { id: 3, title: 200, money: 198.00 }, { id: 4, title: 500, money: 498.00 }, { id: 5, title: 1000, money: 998.00 }] //提现金额
+    };},
   /* 分享 */
   onShareAppMessage: function onShareAppMessage(res) {
 

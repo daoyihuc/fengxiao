@@ -364,6 +364,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _loading = _interopRequireDefault(__webpack_require__(/*! ../../../components/public/loading.vue */ 108));
 var _our = __webpack_require__(/*! ../../../api/our/our.js */ 179);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
@@ -434,9 +437,18 @@ var _our = __webpack_require__(/*! ../../../api/our/our.js */ 179);function _int
 //
 //
 //
+//
+//
+//
 var _default = { data: function data() {return { data: {}, //页面数据
       isShow: true };}, onLoad: function onLoad() {this.getdata();}, methods: { /* 跳转回去 */my_store: function my_store() {uni.navigateTo({ url: '../My_store/My_store' });}, /* 扫一扫 */saoyisao: function saoyisao() {// 允许从相机和相册扫码
-      uni.scanCode({ success: function success(res) {console.log('条码类型：' + res.scanType);console.log('条码内容：' + res.result);} });}, /* 页面数据获取 */getdata: function getdata() {var _this = this;(0, _our.StoreInfo)({ token: uni.getStorageSync('token') }).then(function (res) {if (res.code == 1) {_this.data = res.data;_this.isShow = false;} else {uni.showToast({ title: res.msg, icon: 'none' });}});} } };exports.default = _default;
+      // uni.scanCode({
+      //     success: function (res) {
+      //         console.log('条码类型：' + res.scanType);
+      //         console.log('条码内容：' + res.result);
+      //     }
+      // });
+      uni.navigateTo({ url: '../poster/poster' });}, /* 页面数据获取 */getdata: function getdata() {var _this = this;(0, _our.StoreInfo)({ token: uni.getStorageSync('token') }).then(function (res) {if (res.code == 1) {_this.data = res.data;_this.isShow = false;} else {uni.showToast({ title: res.msg, icon: 'none' });}});} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

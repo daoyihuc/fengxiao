@@ -298,7 +298,7 @@ var _default = { data: function data() {return { name: '', //用户名
       token: null, //判断token是否过期
       code: '', //登录的参数
       Status: null //店铺状态
-    };}, /* 分享 */onShareAppMessage: function onShareAppMessage(res) {}, onLoad: function onLoad() {var _this2 = this;this.token = uni.getStorageSync('token');uni.login({ provider: 'weixin', success: function success(loginRes) {_this2.code = loginRes.code;} });this.getdata();}, onShow: function onShow() {this.getdata();}, methods: { /* 点击跳转 */select_url: function select_url(item) {uni.navigateTo({ url: item.url });}, /* 店铺跳转 */select_store: function select_store() {if (this.data.Status == 0) {uni.showToast({ title: '你尚未提交申请！', icon: 'none', success: function success() {uni.navigateTo({ url: 'store_center/store_center' });} });} else if (this.data.Status == 1) {uni.showToast({ title: '正在审核中！', icon: 'none' });} else if (this.data.Status == 2) {uni.showToast({ title: '申请拒绝！', icon: 'none' });} else if (this.data.Status == 3) {uni.showToast({ title: '门店已被禁用！', icon: 'none' });} else if (this.data.Status == 4) {
+    };}, /* 分享 */onShareAppMessage: function onShareAppMessage(res) {}, onLoad: function onLoad() {var _this2 = this;this.token = uni.getStorageSync('token');uni.login({ provider: 'weixin', success: function success(loginRes) {_this2.code = loginRes.code;} });this.getdata();}, onShow: function onShow() {this.getdata();}, methods: { /* 点击跳转 */select_url: function select_url(item) {uni.navigateTo({ url: item.url });}, /* 店铺跳转 */select_store: function select_store() {if (this.data.Status == 0) {uni.showToast({ title: '你尚未提交申请！', icon: 'none', success: function success() {uni.navigateTo({ url: '../store/Store_entry/Store_entry' });} });} else if (this.data.Status == 1) {uni.showToast({ title: '正在审核中！', icon: 'none' });} else if (this.data.Status == 2) {uni.showToast({ title: '申请拒绝！', icon: 'none' });} else if (this.data.Status == 3) {uni.showToast({ title: '门店已被禁用！', icon: 'none' });} else if (this.data.Status == 4) {
         uni.navigateTo({
           url: 'My_store/My_store' });
 
@@ -393,15 +393,10 @@ var _default = { data: function data() {return { name: '', //用户名
           _this5.data = res.data;
           _this5.name = res.data.nickname;
           uni.setStorageSync('phone', res.data.ServicePhone);
-        } else {
-          uni.showToast({
-            title: res.msg,
-            icon: 'none',
-            success: function success() {
-              _this5.name = '';
-              _this5.log();
-            } });
-
+        } else
+        {
+          _this5.name = '';
+          _this5.log();
         }
       });
     } } };exports.default = _default;

@@ -22,6 +22,9 @@
 					<view class="small_left">
 						总消费：<text>{{data.ConsumptionPoints}}</text>
 					</view>
+					<view class="small_left">
+						共享{{data.ProfitNumber}}份门店分润
+					</view>
 				</view>
 				<!-- <view class="text_smalls">
 					<view class="small_left">

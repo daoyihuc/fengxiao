@@ -1,12 +1,12 @@
 <template>
 	<view class="content">
 		<view class="top_bg">
-			卡包
+			钱包
 		</view>
 		<view class="card_img">
 			<view class="top">
 				<view class="top_left">
-					获取积分<text style="padding-left: 20rpx;">(10积分<text style="color: #FA5F3E;">兑</text>1元)</text>
+					门店消费分红积分<text style="padding-left: 20rpx;">(10积分<text style="color: #FA5F3E;">兑</text>1元)</text>
 				</view>
 				<image src="../../static/img/index/erweima.png" mode="" @tap='erweima'></image>
 			</view>
@@ -59,7 +59,7 @@
 							余额：{{item.ResidualIntegral}}
 						</view>
 						<view class="bot_top active">
-							消费：{{item.ConsumptionPoints}}
+							充值：{{item.ConsumptionPoints}}
 						</view>
 					</view>
 				</view>
@@ -194,10 +194,11 @@
 			width: 100%;
 			height: 300rpx;
 			background: linear-gradient(72deg, #FF444B, #FD7239);
-			text-align: center;
+			// text-align: center;
 			color: #fff;
 			font-size: 15px;
-			padding-top: 60rpx;
+			padding-top:70rpx;
+			padding-left: 50rpx;
 			border-radius: 0 0 20px 20px;
 		}
 

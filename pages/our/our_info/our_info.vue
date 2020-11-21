@@ -29,13 +29,13 @@
 				<!-- <input type="text" :value="gender"  @input='gender_input'/> -->
 				<radio-group name="" @change="radio_change">
 					<label>
-						<radio :value="0" style="transform:scale(0.7)"/><text>保密</text>
+						<radio :value="0" style="transform:scale(0.7)" :checked="data.gender==0?true:false"/><text>保密</text>
 					</label>
 					<label>
-						<radio :value="1" style="transform:scale(0.7)"/><text>男</text>
+						<radio :value="1" style="transform:scale(0.7)" :checked="data.gender==1?true:false"/><text>男</text>
 					</label>
 					<label>
-						<radio :value="2" style="transform:scale(0.7)"/><text>女</text>
+						<radio :value="2" style="transform:scale(0.7)" :checked="data.gender==2?true:false"/><text>女</text>
 					</label>
 				</radio-group>
 			</view>
@@ -45,7 +45,7 @@
 				手机号
 			</view>
 			<view class="li_right">
-				<input type="text" :value="mobile" @input='mobile_input'/>
+				<input type="text" :value="mobile" @input='mobile_input' placeholder="绑定手机号"/>
 			</view>
 		</view>
 		<view class="bot" @tap='save'>
@@ -61,7 +61,7 @@
 			return {
 				image:'../../../static/img/index/erweima.png',//头像
 				id:'',//id号
-				mobile:'绑定手机号',//电话
+				mobile:'',//电话
 				gender:'',//性别
 				name:'',
 				data:{},//所以信息
@@ -141,7 +141,7 @@
 				getinfot({token:uni.getStorageSync('token')}).then((res)=>{
 					if(res.code==1){
 						this.data=res.data;
-						this.mobile=res.data.mobile==''?'请输入手机号':res.data.mobile;
+						this.mobile=res.data.mobile;
 						this.image=res.data.avatar;
 						this.name=res.data.id;
 						if(res.data.gender==2){

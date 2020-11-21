@@ -3,7 +3,7 @@
 		<!-- 轮播图 -->
 		<view class="swiper">
 			<view class="swiper-box">
-				<swiper circular="true" @change="swiperChange" previous-margin="25px" next-margin="25px">
+				<swiper circular="true" @change="swiperChange">
 					<swiper-item v-for="(item, index) in SlideItem" :key="index">
 						<image :src="item.img" mode="" :class="currentSwiper !== index ?'swiper-item-side':''" lazy-load="true"></image>
 					</swiper-item>
@@ -16,7 +16,13 @@
 		<!-- tab -->
 		<view class="tab">
 			<view class="tab_li">
-				<view class="img" v-for="(item,index) in tab_list" @tap='tab_url(item)'>
+				<view class="img" v-for="(item,index) in tab_list" @tap='tab_url(item)'v-if="(data.now_status==0&&index==2)||(data.now_status==0&&index==3)">
+					<image :src="item.image" mode=""></image>
+					<view class="name">
+						{{item.title}}
+					</view>
+				</view>
+				<view class="img" v-for="(item,index) in tab_list" @tap='tab_url(item)'v-if="data.now_status==1">
 					<image :src="item.image" mode=""></image>
 					<view class="name">
 						{{item.title}}
@@ -181,7 +187,7 @@
 			width: 100%;
 			height: 45vw;
 			overflow: hidden;
-			border-radius: 15upx;
+			// border-radius: 15upx;
 			/* box-shadow: 0upx 8upx 25upx rgba(0, 0, 0, 0.2); */
 			position: relative;
 			z-index: 1;
@@ -205,7 +211,7 @@
 			margin: 0 auto;
 			display: block;
 			transition: height .3s;
-			border-radius: 20rpx;
+			// border-radius: 20rpx;
 		}
 
 		.swiper-item-side {
@@ -250,13 +256,13 @@
 				display: flex;
 				justify-content: space-around;
 				padding: 20rpx;
-				font-size: 14px;
+				font-size: 13px;
 				text-align: center;
 
 				.img {
 					image {
-						width: 140rpx;
-						height: 140rpx;
+						width: 100rpx;
+						height: 100rpx;
 					}
 				}
 			}

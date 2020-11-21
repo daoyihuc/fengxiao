@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   cmdProgress: function() {
-    return __webpack_require__.e(/*! import() | components/cmd-progress/cmd-progress */ "components/cmd-progress/cmd-progress").then(__webpack_require__.bind(null, /*! @/components/cmd-progress/cmd-progress.vue */ 277))
+    return __webpack_require__.e(/*! import() | components/cmd-progress/cmd-progress */ "components/cmd-progress/cmd-progress").then(__webpack_require__.bind(null, /*! @/components/cmd-progress/cmd-progress.vue */ 285))
   }
 }
 var render = function() {
@@ -234,7 +234,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _our = __webpack_require__(/*! ../../../api/our/our.js */ 179);var cmdProgress = function cmdProgress() {__webpack_require__.e(/*! require.ensure | components/cmd-progress/cmd-progress */ "components/cmd-progress/cmd-progress").then((function () {return resolve(__webpack_require__(/*! @/components/cmd-progress/cmd-progress.vue */ 277));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+var _our = __webpack_require__(/*! ../../../api/our/our.js */ 179);var cmdProgress = function cmdProgress() {__webpack_require__.e(/*! require.ensure | components/cmd-progress/cmd-progress */ "components/cmd-progress/cmd-progress").then((function () {return resolve(__webpack_require__(/*! @/components/cmd-progress/cmd-progress.vue */ 285));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   data: function data() {
     return {
@@ -250,8 +253,8 @@ var _our = __webpack_require__(/*! ../../../api/our/our.js */ 179);var cmdProgre
 
       {
         image: '../../../static/img/our/store/haibao.png',
-        text: '海报生成',
-        url: '../poster/poster' }],
+        text: '添加订单',
+        url: '../order/order' }],
 
 
       data: {}, //所有数据
@@ -293,15 +296,18 @@ var _our = __webpack_require__(/*! ../../../api/our/our.js */ 179);var cmdProgre
     /* 扫一扫 */
     saoyisao: function saoyisao() {
       // 允许从相机和相册扫码
-      uni.scanCode({
-        success: function success(res) {
-          uni.showToast({
-            title: res.result });
+      // uni.scanCode({
+      //     success: (res)=>{
+      // 		uni.showToast({
+      // 			title:res.result,
 
-
-          console.log('条码类型：' + res.scanType);
-          console.log('条码内容：' + res.result);
-        } });
+      // 		})
+      //         console.log('条码类型：' + res.scanType);
+      //         console.log('条码内容：' + res.result);
+      //     }
+      // });
+      uni.navigateTo({
+        url: '../poster/poster' });
 
     },
     /* 获取到数据 */

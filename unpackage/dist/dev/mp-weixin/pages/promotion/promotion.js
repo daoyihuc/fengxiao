@@ -225,12 +225,12 @@ var _Center = __webpack_require__(/*! ../../api/Center/Center.js */ 39); //
 //
 //
 //
-var _default = { data: function data() {return { tab_list: [{ image: '../../static/img/promotion/jifen(1).png', text: '积分中心', url: 'Integral_center/Integral_center' }, { image: '../../static/img/promotion/tuiguanghaibao.png', text: '推广海报', url: 'Poster/Poster' }, // {
+var _default = { data: function data() {return { tab_list: [{ image: '../../static/img/promotion/jifen(1).png', text: '推广门店', url: 'Integral_center/Integral_center' }, { image: '../../static/img/promotion/tuiguanghaibao.png', text: '推广海报', url: 'Poster/Poster' }, // {
       // 	image:'../../static/img/promotion/guize.png',
       // 	text:'推广规则',
       // 	url:'Promotion_rules/Promotion_rules'
       // },
-      { image: '../../static/img/promotion/tuiguang.png', text: '推广记录', url: 'record/record' }], data: {} //所有数据
+      { image: '../../static/img/promotion/tuiguang.png', text: '推广会员', url: 'record/record' }], data: {} //所有数据
     };}, /* 分享 */onShareAppMessage: function onShareAppMessage(res) {}, onLoad: function onLoad() {this.getdata();}, methods: { /* 提现 */Withdrawal: function Withdrawal() {uni.navigateTo({ url: '../index/Withdrawal/Withdrawal?type=2' });}, /* 提现记录 */Recurrence: function Recurrence() {uni.navigateTo({ url: '../index/Recurrence/Recurrence' });}, /* 小卡片跳转 */tap_car_url: function tap_car_url(item) {uni.navigateTo({ url: item.url });
 
     },

@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="top_bg">
-			<view class="top">我的</view>
+			<view class="top">个人中心</view>
 			<view class="user_info">
 				<view class="left">
 					<image :src="data.avatar" mode=""></image>
@@ -20,7 +20,7 @@
 		<view class="bg_black">
 			<view class="left">
 				<image src="../../static/img/our/jifen.png" mode=""></image>
-				<text>我的积分</text>
+				<text>可提现积分</text>
 				<text>{{data.MyPoints}}</text>
 			</view>
 			<view class="row">
@@ -147,7 +147,7 @@
 						icon:'none',
 						success: () => {
 							uni.navigateTo({
-								url:'store_center/store_center'
+								url:'../store/Store_entry/Store_entry'
 							})
 						}
 					})
@@ -261,15 +261,10 @@
 						this.data = res.data;
 						this.name = res.data.nickname;
 						uni.setStorageSync('phone',res.data.ServicePhone)
-					} else {
-						uni.showToast({
-							title: res.msg,
-							icon: 'none',
-							success: () => {
-								this.name='';
-								this.log();
-							}
-						})
+					} 
+					else {
+						this.name='';
+						this.log();
 					}
 				})
 			}
@@ -289,11 +284,12 @@
 			background-size: 100% 100%;
 			color: #fff;
 			font-size: 15px;
-			padding-top: 60rpx;
+			padding-top: 70rpx;
 
 			// border-radius: 0 0 20px 20px;
 			.top {
-				text-align: center;
+				// text-align: center;
+				padding-left: 50rpx;
 			}
 
 			.user_info {
@@ -345,7 +341,7 @@
 			font-size: 14px;
 			padding: 40rpx;
 			border-radius: 30rpx 30rpx 50rpx 50rpx;
-			margin-top: -100rpx;
+			margin-top: -120rpx;
 			margin-left: 30rpx;
 			margin-right: 30rpx;
 

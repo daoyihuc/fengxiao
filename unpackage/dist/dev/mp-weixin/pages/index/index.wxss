@@ -44,10 +44,10 @@ page {
   height: 300rpx;
   background: -webkit-linear-gradient(18deg, #FF444B, #FD7239);
   background: linear-gradient(72deg, #FF444B, #FD7239);
-  text-align: center;
   color: #fff;
   font-size: 15px;
-  padding-top: 60rpx;
+  padding-top: 70rpx;
+  padding-left: 50rpx;
   -webkit-border-radius: 0 0 20px 20px;
           border-radius: 0 0 20px 20px;
 }

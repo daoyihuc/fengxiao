@@ -58,7 +58,7 @@
 	         <view class="text" v-if="status==1">
 	         	信息审核需要1-3天噢，请耐心等待~
 	         </view>
-				 <view class="text" v-if="status==1">
+				 <view class="text" v-if="status==2">
 				 	审核通过
 				 </view>	
 		</view>
@@ -297,7 +297,7 @@
 		.wait{
 			margin: auto;
 			text-align: center;
-			color: #eee;
+			color: #bababa;
 			text-align: center;
 			font-size: 14px;
 		}

@@ -12,7 +12,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "卡包",
+				"navigationBarTitleText": "钱包",
 				"enablePullDownRefresh":true,
 				"navigationBarBackgroundColor":"#FD7239",
 				"navigationStyle":"custom",
@@ -289,6 +289,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/our/order/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "添加订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -312,7 +321,7 @@
 	            "pagePath" : "pages/index/index",
 	            "iconPath" : "/static/img/store/index.png",
 	            "selectedIconPath" : "/static/img/index/kabao.png",
-	            "text" : "卡包"
+	            "text" : "钱包"
 	        },
 	        
 	        {

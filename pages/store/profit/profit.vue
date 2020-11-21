@@ -2,6 +2,13 @@
 	<view class="content">
 		<loading v-if="isShow == true"></loading>
 		<Lists :logList="logList"></Lists>
+		<view class="wait" v-if="logList.length==0">
+			<image src="../../../static/img/store/quesheng1.png" mode=""></image>
+		     <view class="text" style="text-align: center;font-size: 14px; color: #808080;" >
+		     	暂无数据
+		     </view>
+				 	
+		</view>
 	</view>
 </template>
 

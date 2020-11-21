@@ -30,7 +30,8 @@
     "pages/our/order_details/order_details",
     "pages/our/search_info/search_info",
     "pages/our/poster/poster",
-    "pages/our/logn/logn"
+    "pages/our/logn/logn",
+    "pages/our/order/order"
   ],
   "subPackages": [],
   "window": {
@@ -55,7 +56,7 @@
         "pagePath": "pages/index/index",
         "iconPath": "/static/img/store/index.png",
         "selectedIconPath": "/static/img/index/kabao.png",
-        "text": "卡包"
+        "text": "钱包"
       },
       {
         "pagePath": "pages/promotion/promotion",

@@ -46,3 +46,11 @@ export function PromotionActivity(data){
 export function CountyGgentProfit(data){
 	return request('CountyGgentProfit',data)
 }
+/* 订单提交 */
+export function AddStoreOrder(data){
+	return request('AddStoreOrder',data)
+}
+/* 用户列表 */
+export function GetStoreMember(data){
+	return request('GetStoreMember',data)
+}

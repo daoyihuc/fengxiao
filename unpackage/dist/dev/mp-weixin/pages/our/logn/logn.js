@@ -251,7 +251,7 @@ function onShareAppMessage() {}), _defineProperty(_data$onLoad$onShareA, "method
           gender: infoRes.userInfo.gender,
           nickname: infoRes.userInfo.nickName,
           avatar: infoRes.userInfo.avatarUrl,
-          inviteuid: 1 };
+          inviteuid: uni.getStorageSync('id') };
 
         /* 调用登录*/
         (0, _index.Logn)(data).then(function (res) {
@@ -261,7 +261,7 @@ function onShareAppMessage() {}), _defineProperty(_data$onLoad$onShareA, "method
               icon: 'none',
               success: function success() {
                 uni.setStorageSync('token', res.data.Token);
-                uni.setStorageSync('id', res.data.UserInfo.id);
+                // uni.setStorageSync('id', res.data.UserInfo.id);
                 // uni.setStorageSync('userInfo', res.data.UserInfo);
                 uni.navigateBack({
                   delta: 1 });

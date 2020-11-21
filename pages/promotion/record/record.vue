@@ -15,7 +15,7 @@
 						<text>用户id：</text>{{item.nickname}}
 					</view>
 					<view class="right">
-						+{{item.money}}
+						{{item.money}}
 					</view>
 				</view>
 			</view>

@@ -5,7 +5,7 @@
 			<view class="top">
 				<view class="left">
 					<view class="text">
-						我的积分
+						推广积分
 					</view>
 					<view class="img_money">
 						<image src="../../static/img/promotion/jifen.png" mode=""></image>
@@ -53,7 +53,7 @@
 				tab_list:[
 					{
 						image:'../../static/img/promotion/jifen(1).png',
-						text:'积分中心',
+						text:'推广门店',
 						url:'Integral_center/Integral_center'
 					},
 					{
@@ -68,7 +68,7 @@
 					// },
 					{
 						image:'../../static/img/promotion/tuiguang.png',
-						text:'推广记录',
+						text:'推广会员',
 						url:'record/record'
 					}
 				],
@@ -212,17 +212,17 @@
 				flex-wrap: wrap;
 				justify-content: flex-start;
 				
-				padding: 30rpx;
+				padding: 10rpx;
 
 				.tab_li {
 					padding:70rpx 0;
-					width: 48%;
+					width: 46%;
 					background: #FFFFFF;
 					box-shadow: 0px 0px 24px 0px rgba(217, 217, 217, 0.4);
 					border-radius: 20rpx;
 					font-size: 14px;
 					text-align: center;
-					margin: 20rpx 6rpx;
+					margin: 20rpx 12rpx;
 					// margin-left: 15rpx;
 
 					image {

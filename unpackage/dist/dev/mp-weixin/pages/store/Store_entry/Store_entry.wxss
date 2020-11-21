@@ -121,7 +121,7 @@
 .content .wait {
   margin: auto;
   text-align: center;
-  color: #eee;
+  color: #bababa;
   text-align: center;
   font-size: 14px;
 }

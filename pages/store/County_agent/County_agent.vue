@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		
-		<view class="" v-if="county_agent==1">
+		<view class="" v-if="data.county_agent==1">
 			<view class="card">
 				<view class="top_img" @tap='black'>
 					<image src="../../../static/img/store/left.png" mode="" @tap="black"></image>
@@ -62,11 +62,13 @@
 					<view class="bot" @tap='profit_url(item)'>
 						查看
 					</view>
-					
 				</view>
 			</view>
+			<view style="font-size: 14px;text-align: center;color: #555555;" v-if="StoreList.length==0">
+				暂无店铺
+			</view>
 		</view>
-		<view class="agent_img" v-if="county_agent==0">
+		<view class="agent_img" v-if="data.county_agent==0">
 			<view class="top_img" @tap='black'>
 				<image src="../../../static/img/store/left1.png" mode="" @tap="black"></image>
 				<text>县级代理</text>
@@ -100,7 +102,7 @@
 			 
 		 },
 		onLoad() {
-			this.county_agent=uni.getStorageSync('county_agent');
+			// this.county_agent=uni.getStorageSync('county_agent');
 			this.getdata();
 		},
 		/* 上拉刷新 */
@@ -184,7 +186,7 @@
 	
 	.card {
 		width: 100%;
-		height: 480rpx;
+		height: 520rpx;
 		background-size: 100% 100%;
 		background: linear-gradient(72deg, #FF444B, #FD7239);
 	}
@@ -192,7 +194,7 @@
 	.top_img {
 	
 		display: flex;
-		padding: 50rpx 0;
+		padding: 70rpx 0;
 		font-size: 15px;
 		color: #FFFFFF;
 	

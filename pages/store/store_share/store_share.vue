@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="bg">
-			<image class="img" src="../../../static/fenxiang.png" mode=""></image>
+			<image class="img" src="../../../static/fenxiangs.png" mode=""></image>
 		</view>
 		<view class="our">
 			<image class="imgs" :src="poster.erweima" mode="" show-menu-by-longpress></image>
@@ -130,10 +130,14 @@
 </script>
 
 <style lang="scss">
+	page{
+		background-color: #F7F4F8;
+	}
 	.content{
 		.bg{
 			display: flex;
 			justify-content: center;
+			margin-top: 30rpx;
 		}
 		.img{
 			// margin: 50rpx;

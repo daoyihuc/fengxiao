@@ -30,6 +30,9 @@
 			</view>
 
 		</view>
+		<view class="text" style="color: #555555;font-size: 14px;padding: 20rpx;">
+			提示：每笔金额收取2元手续费
+		</view>
 		<view class="bot" @tap='save'>
 			提现
 		</view>
@@ -158,7 +161,7 @@
 				font-size: 15px;
 
 				input {
-					width: 180rpx;
+					// width: 20rpx;
 				}
 
 				text {

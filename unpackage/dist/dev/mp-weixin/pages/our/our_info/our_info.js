@@ -245,7 +245,7 @@ var _index = __webpack_require__(/*! ../../../api/Index/index.js */ 8); //
 //
 var _default = { data: function data() {return { image: '../../../static/img/index/erweima.png', //头像
       id: '', //id号
-      mobile: '绑定手机号', //电话
+      mobile: '', //电话
       gender: '', //性别
       name: '', data: {} //所以信息
     };}, /* 分享 */onShareAppMessage: function onShareAppMessage(res) {}, onLoad: function onLoad() {this.getdata();}, methods: { /* 选择性别 */radio_change: function radio_change(e) {this.gender = e.detail.value;}, /* 跟换头像 */select_img: function select_img() {var _this = this;uni.chooseImage({ count: 1, //默认9
@@ -273,7 +273,7 @@ var _default = { data: function data() {return { image: '../../../static/img/ind
       (0, _index.getinfot)({ token: uni.getStorageSync('token') }).then(function (res) {
         if (res.code == 1) {
           _this2.data = res.data;
-          _this2.mobile = res.data.mobile == '' ? '请输入手机号' : res.data.mobile;
+          _this2.mobile = res.data.mobile;
           _this2.image = res.data.avatar;
           _this2.name = res.data.id;
           if (res.data.gender == 2) {

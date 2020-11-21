@@ -7,7 +7,7 @@
 				</view>
 				<view class="right">
 					<image class="img" :src="data.logo" mode=""></image>
-					<image class="jiantou" src="../../../static/img/our/jiantou.png" mode=""></image>
+					<!-- <image class="jiantou" src="../../../static/img/our/jiantou.png" mode=""></image> -->
 				</view>
 			</view>
 			<view class="li">
@@ -36,7 +36,7 @@
 			</view>
 			<view class="lis">
 				<view class="left">
-					门店电话
+					门店描述
 				</view>
 				<view class="right">
 					{{data.desc}}
@@ -54,8 +54,11 @@
 				<view>我的店铺</view>
 			</view>
 			<view class="center" @tap='saoyisao'>
-				<image src="../../../static/img/our/store/saoyisao.png" mode=""></image>
-				<view>扫一扫</view>
+				<view class="er">
+					<image src="../../../static/er.png" mode=""></image>
+				</view>
+				<!-- <image src="../../../static/img/our/store/saoyisao.png" mode=""></image> -->
+				<view >门店二维码</view>
 			</view>
 			<view class="right" @tap='store_center'>
 				<image src="../../../static/img/our/store/mendian.png" mode=""></image>
@@ -91,12 +94,15 @@
 			/* 扫一扫 */
 			saoyisao(){
 				// 允许从相机和相册扫码
-				uni.scanCode({
-				    success: function (res) {
-				        console.log('条码类型：' + res.scanType);
-				        console.log('条码内容：' + res.result);
-				    }
-				});
+				// uni.scanCode({
+				//     success: function (res) {
+				//         console.log('条码类型：' + res.scanType);
+				//         console.log('条码内容：' + res.result);
+				//     }
+				// });
+				uni.navigateTo({
+					url:'../poster/poster'
+				})
 			},
 			/* 页面数据获取 */
 			getdata(){
@@ -137,6 +143,7 @@
 					.img {
 						width: 100rpx;
 						height: 100rpx;
+						border-radius: 50%;
 					}
 					.jiantou {
 						width: 18rpx;
@@ -182,10 +189,26 @@
 
 			.center {
 				margin-top: -30px;
+				// text-align: center;
 
+				.er{
+					width: 70rpx;
+					height: 70rpx;
+					background-color: #FA5F3E;
+					border-radius: 50%;
+					padding: 10rpx;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					box-shadow: 0px 0px 5px 5rpx #e2e2e2;
+					margin-bottom: 25rpx;
+					margin-left: 10rpx;
+					
+				}
+				
 				image {
-					width: 100rpx;
-					height: 100rpx;
+					width: 50rpx;
+					height: 50rpx;
 				}
 
 				view {
