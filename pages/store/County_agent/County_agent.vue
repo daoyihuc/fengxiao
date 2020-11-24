@@ -1,8 +1,8 @@
 <template>
 	<view class="content">
 		
-		<view class="" v-if="data.county_agent==1">
-			<view class="card">
+		<view class="" v-if="county_agent==1">
+			<!-- <view class="card">
 				<view class="top_img" @tap='black'>
 					<image src="../../../static/img/store/left.png" mode="" @tap="black"></image>
 					<text>县级代理</text>
@@ -12,7 +12,6 @@
 						我的积分
 					</view>
 				</view>
-				<!-- 金额 -->
 				<view class="money">
 					{{data.county_agent_money}}
 				</view>
@@ -29,12 +28,17 @@
 					</view>
 					<image src="../../../static/img/store/right.png" mode=""></image>
 				</view>
-			</view>
+			</view> -->
+			<view class="top_img" @tap='black' style="position: absolute; top: 5rpx;width: 100%;">
+				<image src="../../../static/img/store/left.png" mode="" @tap="black"></image>
+				<text>县级代理</text>
+			</view>                
+			<image src="../../../static/jiaruwomen.png" style="width: 100%;" mode=""></image>
 			<view class="card_top">
 				<view class="left">
 					<view class="row">
 					</view>
-					<text>县级代理店</text>
+					<text>我的店铺</text>
 				</view>
 
 				<view class="right"@tap='profit_urls' >
@@ -68,7 +72,7 @@
 				暂无店铺
 			</view>
 		</view>
-		<view class="agent_img" v-if="data.county_agent==0">
+		<view class="agent_img" v-if="county_agent==0">
 			<view class="top_img" @tap='black'>
 				<image src="../../../static/img/store/left1.png" mode="" @tap="black"></image>
 				<text>县级代理</text>
@@ -102,7 +106,7 @@
 			 
 		 },
 		onLoad() {
-			// this.county_agent=uni.getStorageSync('county_agent');
+			this.county_agent=uni.getStorageSync('county_agent');
 			this.getdata();
 		},
 		/* 上拉刷新 */

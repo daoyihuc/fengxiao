@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<!-- 卡片 -->
-		<view class="top_card">
+		<!-- <view class="top_card">
 			<view class="top">
 				<view class="left">
 					<view class="text">
@@ -30,6 +30,16 @@
 				</view>
 			</view>
 		</view>
+		 -->
+		<image src="../../static/9aed159248d614811aa7b3c8a125afc.png" style="width: 100%;" mode=""></image>
+		<view class="card_top">
+			<view class="left">
+				<view class="row">
+				</view>
+				<text>推广中心</text>
+			</view>
+
+		</view>
 		<!-- tab卡片 -->
 		<view class="tab_card">
 			<view class="tab_card_list">
@@ -52,7 +62,7 @@
 			return {
 				tab_list:[
 					{
-						image:'../../static/img/promotion/jifen(1).png',
+						image:'../../static/mendian.png',
 						text:'推广门店',
 						url:'Integral_center/Integral_center'
 					},
@@ -61,16 +71,17 @@
 						text:'推广海报',
 						url:'Poster/Poster'
 					},
-					// {
-					// 	image:'../../static/img/promotion/guize.png',
-					// 	text:'推广规则',
-					// 	url:'Promotion_rules/Promotion_rules'
-					// },
 					{
-						image:'../../static/img/promotion/tuiguang.png',
+						image:'../../static/huiyuan.png',
 						text:'推广会员',
 						url:'record/record'
+					},
+					{
+						image:'../../static/img/promotion/tuiguang.png',
+						text:'推广统计',
+						url:'Promotion_rules/Promotion_rules'
 					}
+					
 				],
 				data:{},//所有数据
 
@@ -132,6 +143,48 @@
 
 <style lang="scss">
 	.content {
+		.card_top {
+			background-color: #FFFFFF;
+			border-radius: 20rpx 20rpx 0 0;
+			position: absolute;
+			top: 450rpx;
+			width: 100%;
+			// padding: 40rpx;
+			.left{
+				font-size: 16px;
+				color: #333333;
+				display: flex;
+				margin-top: -20rpx;
+				align-items: center;
+				font-weight: bold;
+				padding:50rpx;
+			}
+			.right{
+				display: flex;
+				align-items: center;
+				font-size: 14px;
+				color: #d1d1d1;
+				image {
+					width: 30rpx;
+					height: 30rpx;
+				}
+				
+			}
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			// padding: 30rpx;
+		
+			.row {
+				height: 20px;
+				width: 2px;
+				background-color: #FA5F3E;
+			}
+		
+			text {
+				padding-left: 20rpx;
+			}
+		}
 		.top_card {
 			margin: auto;
 			width: 95%;
@@ -207,11 +260,12 @@
 
 		/* tab卡片 */
 		.tab_card {
+			
 			.tab_card_list {
 				display: flex;
 				flex-wrap: wrap;
-				justify-content: flex-start;
-				
+				justify-content: space-around;
+				margin-top: 70rpx;
 				padding: 10rpx;
 
 				.tab_li {
@@ -222,11 +276,11 @@
 					border-radius: 20rpx;
 					font-size: 14px;
 					text-align: center;
-					margin: 20rpx 12rpx;
+					margin: 10rpx 0;
 					// margin-left: 15rpx;
 
 					image {
-						width: 80rpx;
+						width: 90rpx;
 						height: 90rpx;
 					}
 				}

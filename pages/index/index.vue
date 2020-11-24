@@ -1,9 +1,9 @@
 <template>
 	<view class="content">
 		<view class="top_bg">
-			钱包
+			卡包
 		</view>
-		<view class="card_img">
+		<!-- <view class="card_img">
 			<view class="top">
 				<view class="top_left">
 					门店消费分红积分<text style="padding-left: 20rpx;">(10积分<text style="color: #FA5F3E;">兑</text>1元)</text>
@@ -31,13 +31,19 @@
 					<text>提现记录</text>
 				</view>
 			</view>
-		</view>
+		</view> -->
 		<!-- 卡片样式 -->
 		<view class="card">
 			<view class="card_top">
-				<view class="row">
+				<view class="left">
+					<view class="row">
+					</view>
+					<text>近期消费</text>
 				</view>
-				<text>近期消费</text>
+				<view class="right" @tap='obtain'>
+					<image src="../../static/img/index/huoqu.png" mode=""></image>
+					<text>获取记录</text>
+				</view>
 			</view>
 			<view class="card_list">
 				<view class="card_li" v-for="(item,index) in List" :key='index' @tap='store_info(item)'>
@@ -66,7 +72,7 @@
 			</view>
 		</view>
 		<!-- 无数据展示 -->
-		<view class="wait" v-if="List.length==0">
+		<view class="wait" v-if="List.length==0" style="margin-top: 50rpx;">
 			<image src="../../static/img/store/quesheng1.png" mode=""></image>
 		     <view class="text" style="text-align: center;font-size: 14px; color: #808080;" >
 		     	暂无数据
@@ -191,7 +197,6 @@
 		justify-content: center;
 
 		.top_bg {
-			width: 100%;
 			height: 300rpx;
 			background: linear-gradient(72deg, #FF444B, #FD7239);
 			// text-align: center;
@@ -199,7 +204,7 @@
 			font-size: 15px;
 			padding-top:70rpx;
 			padding-left: 50rpx;
-			border-radius: 0 0 20px 20px;
+			border-radius: 0 0 60rpx  60rpx;
 		}
 
 		.card_img {
@@ -289,14 +294,31 @@
 			background-color: #FFFFFF;
 			box-shadow: 0px 3px 21px 0px rgba(168, 168, 168, 0.17);
 			margin: 10rpx 20rpx;
+			margin-top: -20%;
 			border-radius: 20rpx;
 
 			.card_top {
-				font-size: 16px;
-				color: #333333;
+				.left{
+					font-size: 16px;
+					color: #333333;
+					display: flex;
+					align-items: center;
+					font-weight: bold;
+				}
+				.right{
+					display: flex;
+					align-items: center;
+					font-size: 14px;
+					color: #d1d1d1;
+					image {
+						width: 30rpx;
+						height: 30rpx;
+					}
+					
+				}
 				display: flex;
 				align-items: center;
-				font-weight: bold;
+				justify-content: space-between;
 				padding: 30rpx;
 
 				.row {

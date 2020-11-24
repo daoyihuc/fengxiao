@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "lists": "/components/Lists/Lists",
+    "loading": "/components/public/loading"
+  }
+}

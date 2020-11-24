@@ -143,8 +143,15 @@ var _our = __webpack_require__(/*! ../../../api/our/our.js */ 179); //
 //
 //
 //
-var _default = { data: function data() {return { data: {} //所有数据
-    };}, onLoad: function onLoad() {
+var _default = { data: function data() {return { data: {}, //所有数据
+      type: '' //类型
+    };}, onLoad: function onLoad(e) {
+    if (e.type) {
+      this.type = e.type;
+      uni.setNavigationBarTitle({
+        title: '常见问题' });
+
+    }
     this.getdata();
   },
   /* 分享 */
@@ -155,7 +162,8 @@ var _default = { data: function data() {return { data: {} //所有数据
     /* 获取数据 */
     getdata: function getdata() {var _this = this;
       (0, _our.AboutUs)({
-        token: uni.getStorageSync('token') }).
+        token: uni.getStorageSync('token'),
+        type: this.type }).
       then(function (res) {
         if (res.code == 1) {
           _this.data = res.data;

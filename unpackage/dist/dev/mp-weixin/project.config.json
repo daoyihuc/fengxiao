@@ -5,28 +5,92 @@
   },
   "setting": {
     "urlCheck": false,
-    "minified": true
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useMultiFrameRuntime": false,
+    "useApiHook": true
   },
   "compileType": "miniprogram",
   "libVersion": "",
   "appid": "wxd521d615abdbe248",
   "projectname": "Store_distribution",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
+    "plugin": {
       "list": []
     },
     "game": {
-      "current": -1,
+      "list": []
+    },
+    "gamePlugin": {
       "list": []
     },
     "miniprogram": {
-      "current": -1,
-      "list": []
+      "list": [
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/Recurrence/Recurrence",
+          "pathName": "pages/index/Recurrence/Recurrence",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/store_info/store_info",
+          "pathName": "pages/index/store_info/store_info",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/store_info/store_info",
+          "pathName": "pages/index/store_info/store_info",
+          "query": "id=1",
+          "scene": null
+        },
+        {
+          "name": "pages/store/County_agent/County_agent",
+          "pathName": "pages/store/County_agent/County_agent",
+          "query": "id=1",
+          "scene": null
+        },
+        {
+          "name": "pages/promotion/promotion",
+          "pathName": "pages/promotion/promotion",
+          "query": "id=1",
+          "scene": null
+        },
+        {
+          "name": "pages/promotion/Promotion_rules/Promotion_rules",
+          "pathName": "pages/promotion/Promotion_rules/Promotion_rules",
+          "query": "id=1",
+          "scene": null
+        },
+        {
+          "name": "pages/our/wallet/wallet",
+          "pathName": "pages/our/wallet/wallet",
+          "query": "id=1",
+          "scene": null
+        }
+      ]
     }
   }
 }

@@ -92,8 +92,8 @@
 .content .record_list .left image {
   width: 100rpx;
   height: 100rpx;
-  border: 50%;
-  padding: 0 20rpx;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 .content .record_list .title {
   font-size: 28rpx;
@@ -107,10 +107,10 @@
   color: #7C7C7C;
 }
 .content .record_list .right {
-  font-size: 36rpx;
+  font-size: 14px;
   font-family: Source Han Sans CN;
   font-weight: 500;
-  color: #FF4643;
+  color: #E5E5E5;
 }
 .content .nodata {
   color: #ccc;

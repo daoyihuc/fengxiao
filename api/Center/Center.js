@@ -19,3 +19,7 @@ export function PromoterPoster(data){
 export function YuanbaoCenter(data){
 	return request('YuanbaoCenter',data)
 }
+/* 推广统计接口 */
+export function PromotionStatistics(data){
+	return request('PromotionStatistics',data)
+}

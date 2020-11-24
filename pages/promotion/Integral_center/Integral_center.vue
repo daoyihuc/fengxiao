@@ -1,8 +1,8 @@
 <template>
 	<view class="content">
 		<!-- 卡片 -->
-		<view class="card">
-			<view class="list">
+		<!--<view class="card">
+			 <view class="list">
 				<view class="">
 					已提现积分
 				</view>
@@ -32,12 +32,12 @@
 					</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 		<!-- 近期消费-->
 		<view class="card_top">
 			<view class="row">
 			</view>
-			<text>直推门店返利</text>
+			<text>推广门店返利</text>
 		</view>
 		<!-- 列表-->
 		<view class="withdrawalrecord">

@@ -9112,7 +9112,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.PromotionLog = PromotionLog;exports.PromotionCenter = PromotionCenter;exports.PromoterPoster = PromoterPoster;exports.YuanbaoCenter = YuanbaoCenter;var _request = _interopRequireDefault(__webpack_require__(/*! ../../utils/request.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.PromotionLog = PromotionLog;exports.PromotionCenter = PromotionCenter;exports.PromoterPoster = PromoterPoster;exports.YuanbaoCenter = YuanbaoCenter;exports.PromotionStatistics = PromotionStatistics;var _request = _interopRequireDefault(__webpack_require__(/*! ../../utils/request.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 /* 推广记录接口 */
 function PromotionLog(data) {
@@ -9132,6 +9132,10 @@ function PromoterPoster(data) {
 /* 元宝中心接口 */
 function YuanbaoCenter(data) {
   return (0, _request.default)('YuanbaoCenter', data);
+}
+/* 推广统计接口 */
+function PromotionStatistics(data) {
+  return (0, _request.default)('PromotionStatistics', data);
 }
 
 /***/ }),

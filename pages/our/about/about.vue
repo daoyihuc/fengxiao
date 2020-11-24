@@ -10,9 +10,16 @@
 		data() {
 			return {
 				data:{},//所有数据
+				type:'',//类型
 			}
 		},
-		onLoad() {
+		onLoad(e) {
+			if(e.type){
+				this.type=e.type;
+				uni.setNavigationBarTitle({
+				    title: '常见问题'
+				})
+			}
 			this.getdata();
 		},
 		/* 分享 */
@@ -23,7 +30,8 @@
 			/* 获取数据 */
 			getdata(){
 				AboutUs({
-					token:uni.getStorageSync('token')
+					token:uni.getStorageSync('token'),
+					type:this.type
 				}).then(res=>{
 					if(res.code==1){
 						this.data=res.data;

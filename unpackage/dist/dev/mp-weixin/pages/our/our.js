@@ -286,19 +286,31 @@ var _index = __webpack_require__(/*! ../../api/Index/index.js */ 8); //
 //
 //
 var _default = { data: function data() {return { name: '', //用户名
-      our_list_one: [{ title: '我的二维码', image: '../../static/img/our/erweimaw.png', url: 'My_code/My_code' } // ,
+      our_list_one: [{ title: '我的钱包', image: '../../static/qianbao.png', url: 'wallet/wallet' }, { title: '我的二维码', image: '../../static/img/our/erweimaw.png', url: 'My_code/My_code' } // ,
       // {
       // 	title: '我的店铺',
       // 	image: '../../static/img/our/dianpu1.png',
       // 	url: 'My_store/My_store'
       // }
-      ], our_list_twe: [{ title: '关于我们', image: '../../static/img/our/guanyu.png', url: 'about/about' }, { title: '意见反馈', image: '../../static/img/our/yijian.png', url: 'opinion/opinion' }], data: {}, //所以信息
+      ], our_list_twe: [{ title: '关于我们', image: '../../static/img/our/guanyu.png', url: 'about/about' }, { title: '意见反馈', image: '../../static/img/our/yijian.png', url: 'opinion/opinion' }, { title: '常见问题', image: '../../static/wenti.png', url: 'about/about?type=2' }], data: {}, //所以信息
       score: '', //积分
       fronzen_score: '', //冻结积分
       token: null, //判断token是否过期
       code: '', //登录的参数
       Status: null //店铺状态
-    };}, /* 分享 */onShareAppMessage: function onShareAppMessage(res) {}, onLoad: function onLoad() {var _this2 = this;this.token = uni.getStorageSync('token');uni.login({ provider: 'weixin', success: function success(loginRes) {_this2.code = loginRes.code;} });this.getdata();}, onShow: function onShow() {this.getdata();}, methods: { /* 点击跳转 */select_url: function select_url(item) {uni.navigateTo({ url: item.url });}, /* 店铺跳转 */select_store: function select_store() {if (this.data.Status == 0) {uni.showToast({ title: '你尚未提交申请！', icon: 'none', success: function success() {uni.navigateTo({ url: '../store/Store_entry/Store_entry' });} });} else if (this.data.Status == 1) {uni.showToast({ title: '正在审核中！', icon: 'none' });} else if (this.data.Status == 2) {uni.showToast({ title: '申请拒绝！', icon: 'none' });} else if (this.data.Status == 3) {uni.showToast({ title: '门店已被禁用！', icon: 'none' });} else if (this.data.Status == 4) {
+    };}, /* 分享 */onShareAppMessage: function onShareAppMessage(res) {}, onLoad: function onLoad() {var _this2 = this;this.token = uni.getStorageSync('token');uni.login({ provider: 'weixin', success: function success(loginRes) {_this2.code = loginRes.code;} });this.getdata();}, onShow: function onShow() {this.getdata();}, methods: { /* 点击跳转 */select_url: function select_url(item) {uni.navigateTo({ url: item.url });}, /* 店铺跳转 */select_store: function select_store() {if (this.data.Status == 0) {uni.showToast({ title: '你尚未提交申请！', icon: 'none', success: function success() {uni.navigateTo({ url: '../store/Store_entry/Store_entry' });} });} else if (this.data.Status == 1) {uni.showToast({ title: '正在审核中！', icon: 'none' });
+
+      } else if (this.data.Status == 2) {
+        uni.showToast({
+          title: '申请拒绝！',
+          icon: 'none' });
+
+      } else if (this.data.Status == 3) {
+        uni.showToast({
+          title: '门店已被禁用！',
+          icon: 'none' });
+
+      } else if (this.data.Status == 4) {
         uni.navigateTo({
           url: 'My_store/My_store' });
 

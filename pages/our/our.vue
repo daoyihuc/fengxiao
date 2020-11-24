@@ -20,8 +20,8 @@
 		<view class="bg_black">
 			<view class="left">
 				<image src="../../static/img/our/jifen.png" mode=""></image>
-				<text>可提现积分</text>
-				<text>{{data.MyPoints}}</text>
+				<text>我的积分</text>
+				<text>{{data.MyPoints}}pv</text>
 			</view>
 			<view class="row">
 
@@ -29,10 +29,10 @@
 			<view class="left">
 				<image src="../../static/img/our/jifen2.png" mode=""></image>
 				<text>冻结积分</text>
-				<text>{{data.FrozenPoints}}</text>
+				<text>{{data.FrozenPoints}}pv</text>
 			</view>
 		</view>
-		<view class="tab_list">
+		<view class="tab_list" style="margin-bottom: 200rpx;">
 			<view class="li" v-for="(item,index) in our_list_one" :key='index' @tap='select_url(item)'>
 				<view class="left">
 					<image :src="item.image" mode=""></image>
@@ -44,7 +44,7 @@
 			</view>
 			<view class="li" @tap='select_store'>
 				<view class="left">
-					<image src="../../static/img/our/dianpu1.png" mode=""></image>
+					<image src="../../static/dianpu1.png" mode=""></image>
 					<text>我的店铺</text>
 				</view>
 				<view class="right">
@@ -84,7 +84,13 @@
 		data() {
 			return {
 				name: '', //用户名
-				our_list_one: [{
+				our_list_one: [
+					{
+						title: '我的钱包',
+						image: '../../static/qianbao.png',
+						url: 'wallet/wallet'
+					},
+					{
 						title: '我的二维码',
 						image: '../../static/img/our/erweimaw.png',
 						url: 'My_code/My_code'
@@ -96,7 +102,8 @@
 					// 	url: 'My_store/My_store'
 					// }
 				],
-				our_list_twe: [{
+				our_list_twe: [
+					{
 						title: '关于我们',
 						image: '../../static/img/our/guanyu.png',
 						url: 'about/about'
@@ -105,7 +112,12 @@
 						title: '意见反馈',
 						image: '../../static/img/our/yijian.png',
 						url: 'opinion/opinion'
-					}
+					},
+					{
+						title: '常见问题',
+						image: '../../static/wenti.png',
+						url: 'about/about?type=2'
+					},
 				],
 				data: {}, //所以信息
 				score: '', //积分

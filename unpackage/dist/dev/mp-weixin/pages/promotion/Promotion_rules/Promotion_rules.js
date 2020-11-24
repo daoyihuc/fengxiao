@@ -130,41 +130,42 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _Center = __webpack_require__(/*! ../../../api/Center/Center.js */ 39);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var _default =
 {
   data: function data() {
     return {
@@ -177,34 +178,48 @@ var _default =
         text: '推广门店' }],
 
 
-      logList: [
-      {
-        image: '../../../static/img/index/erweima.png',
-        title: '提现',
-        money: '50' },
+      logList: [],
 
-      {
-        image: '../../../static/img/index/erweima.png',
-        title: '提现',
-        money: '50' },
-
-      {
-        image: '../../../static/img/index/erweima.png',
-        title: '提现',
-        money: '50' }] };
-
-
-
+      page: 1 //页码
+    };
   },
   /* 分享 */
   onShareAppMessage: function onShareAppMessage(res) {
 
   },
+  onLoad: function onLoad() {
+    this.getdata();
+  },
+  onReachBottom: function onReachBottom() {
+    this.page++;
+    this.getdata();
+  },
   methods: {
     /* 点击条件样式选择 */
     select_active: function select_active(index) {
+      this.logList = [];
+      this.page = 1;
       this.current = index;
+      this.getdata();
+    },
+    /* 获取数据 */
+    getdata: function getdata() {var _this = this;
+      (0, _Center.PromotionStatistics)({
+        token: uni.getStorageSync('token'),
+        Page: this.page,
+        type: this.current + 1 }).
+      then(function (res) {
+        if (res.code == 1) {
+          _this.logList = [].concat(_toConsumableArray(_this.logList), _toConsumableArray(res.data.List));
+        } else {
+          uni.showToast({
+            title: res.msg,
+            icon: 'none' });
+
+        }
+      });
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

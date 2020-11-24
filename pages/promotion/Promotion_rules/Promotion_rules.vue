@@ -7,32 +7,33 @@
 		   </view>
 	   </view>
 	   <view class="img_bg">
-	   	<image src="../../../static/img/index/beijingh.png" mode=""></image>
+	   	<image src="../../../static/beijing.png" mode=""></image>
 	   </view>
 	   <view class="card_top">
 	   	<view class="row">
 	   	</view>
-	   	<text>用户列表</text>
+	   	<text>列表</text>
 	   </view>
 	   <!-- 列表-->
 	   <view class="withdrawalrecord">
 	   	<view v-for="(item, index) in logList" :key="index" class="record_list">
 	   		<view class="left">
-				<image :src="item.image" mode=""></image>
-	   			<view class="title">{{item.title}}</view>
+				<image :src="item.avatar" mode=""></image>
+	   			<view class="title" style="padding-left: 20rpx;">{{item.nickname}}</view>
 	   			
 	   		</view>
 	   		<view class="right">
-	   			<view>{{item.money}}</view>
+	   			<view>{{item.createtime}}</view>
 	   		</view>
 	   	</view>
-	   	<view class="nodata" v-if="logList.length >= 6">—— 到底啦 ——</view>
+	   	<view class="nodata" v-if="logList.length==0">—— 暂无数据 ——</view>
 	   </view>
 	   <nodata :colors="colors" title="暂无明细" v-if="logList.length == 0"></nodata>
 	</view>
 </template>
 
 <script>
+	import {PromotionStatistics} from '../../../api/Center/Center.js'
 	export default {
 		data() {
 			return {
@@ -46,32 +47,45 @@
 					},
 					],
 					logList: [
-						{
-							image:'../../../static/img/index/erweima.png',
-							title:'提现',
-							money:'50'
-						},
-						{
-							image:'../../../static/img/index/erweima.png',
-							title:'提现',
-							money:'50'
-						},
-						{
-							image:'../../../static/img/index/erweima.png',
-							title:'提现',
-							money:'50'
-						}
 					],
+					page:1,//页码
 			}
 		},
 		/* 分享 */
 		 onShareAppMessage(res){
 			 
 		 },
+		 onLoad() {
+		 	this.getdata();
+		 },
+		 onReachBottom() {
+		 	this.page++;
+			this.getdata();
+		 },
 		methods: {
 			/* 点击条件样式选择 */
 			select_active(index){
+				this.logList=[];
+				this.page=1;
 				this.current=index;
+				this.getdata();
+			},
+			/* 获取数据 */
+			getdata(){
+				PromotionStatistics({
+					token:uni.getStorageSync('token'),
+					Page:this.page,
+					type:this.current+1
+				}).then(res=>{
+				     if(res.code==1){
+						this.logList=[...this.logList,...res.data.List];
+					 }else{
+						 uni.showToast({
+						 	title:res.msg,
+							icon:'none'
+						 })
+					 }
+				})
 			}
 		}
 	}
@@ -137,8 +151,7 @@
 		 	image{
 				width: 100rpx;
 				height: 100rpx;
-				border: 50%;
-				padding: 0 20rpx;
+				border-radius: 50%;
 			}
 		 }
 		 .record_list .title {
@@ -155,10 +168,10 @@
 		 }
 		 
 		 .record_list .right {
-		 	font-size: 36upx;
+		 	font-size: 14px;
 		 	font-family: Source Han Sans CN;
 		 	font-weight: 500;
-		 	color: #FF4643;
+		 	color: #E5E5E5;
 		 }
 		 
 		 .nodata {

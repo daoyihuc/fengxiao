@@ -27,6 +27,58 @@
 .content {
   /* tab卡片 */
 }
+.content .card_top {
+  background-color: #FFFFFF;
+  -webkit-border-radius: 20rpx 20rpx 0 0;
+          border-radius: 20rpx 20rpx 0 0;
+  position: absolute;
+  top: 450rpx;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.content .card_top .left {
+  font-size: 16px;
+  color: #333333;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin-top: -20rpx;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-weight: bold;
+  padding: 50rpx;
+}
+.content .card_top .right {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-size: 14px;
+  color: #d1d1d1;
+}
+.content .card_top .right image {
+  width: 30rpx;
+  height: 30rpx;
+}
+.content .card_top .row {
+  height: 20px;
+  width: 2px;
+  background-color: #FA5F3E;
+}
+.content .card_top text {
+  padding-left: 20rpx;
+}
 .content .top_card {
   margin: auto;
   width: 95%;
@@ -116,9 +168,9 @@
   display: flex;
   -webkit-flex-wrap: wrap;
           flex-wrap: wrap;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-          justify-content: flex-start;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  margin-top: 70rpx;
   padding: 10rpx;
 }
 .content .tab_card .tab_card_list .tab_li {
@@ -131,10 +183,10 @@
           border-radius: 20rpx;
   font-size: 14px;
   text-align: center;
-  margin: 20rpx 12rpx;
+  margin: 10rpx 0;
 }
 .content .tab_card .tab_card_list .tab_li image {
-  width: 80rpx;
+  width: 90rpx;
   height: 90rpx;
 }
 

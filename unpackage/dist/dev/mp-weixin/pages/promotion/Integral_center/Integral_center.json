@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "积分中心",
+  "navigationBarTitleText": "推广门店",
   "enablePullDownRefresh": false,
   "usingComponents": {
     "loading": "/components/public/loading"
